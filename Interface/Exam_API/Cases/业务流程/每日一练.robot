@@ -2,13 +2,14 @@
 Suite Setup       SuiteSetup
 Suite Teardown    SuiteTeardown
 Test Teardown     TestTeardown
+Force Tags        打卡
 Metadata          name    每日一练
 Resource          ../../Bussiness/每日一练.robot
 Resource          ../../Common/Resource/ComTest.robot
 Library           DatabaseLibrary
 
 *** Test Cases ***
-修改科目
+每日一练
     ${examTypeIdInput}    set Variable    5
     ${subjectIdInput}    set Variable    440
     ${examTypeAssert}    Query    SELECT primary_categories FROM exam_type WHERE id=${examTypeIdInput}

@@ -10,6 +10,7 @@ Library           ../../Common/Library/Function.py
 Resource          ../../API/Users.robot
 Variables         ../../AssertJson/Users.py
 
+
 *** Test Cases ***
 home
     ${data}    GET/users/home
@@ -56,12 +57,4 @@ push
     ${jsonkeys}    Compare Jsonkeys    ${push}    ${data}
     Should be true    ${jsonkeys['assertStatus']}    ${jsonkeys}
     ${jsonvalues}    compareJsonvaluesTpye    ${push}    ${data}
-    Should be true    ${jsonvalues['assertStatus']}    ${jsonvalues}
-
-survey
-    ${answer}    CreateList    A    B    C    D    A
-    ${data}    POST/users/survey    ${answer}
-    ${jsonkeys}    Compare Jsonkeys    ${survey}    ${data}
-    Should be true    ${jsonkeys['assertStatus']}    ${jsonkeys}
-    ${jsonvalues}    compareJsonvaluesTpye    ${survey}    ${data}
     Should be true    ${jsonvalues['assertStatus']}    ${jsonvalues}

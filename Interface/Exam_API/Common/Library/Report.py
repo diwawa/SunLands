@@ -103,8 +103,9 @@ class Report(object):
                     if col == 0:
                         # 去除项目名称及Cases
                         str1 = value[row][0].split(".")
-                        str1.pop(0)
-                        str1.pop(0)
+                        if len(str1) > 2:
+                            str1.pop(0)
+                            str1.pop(0)
                         str2 = str1[0]
                         for x in range(1, len(str1)):
                             str2 += "--" + str1[x]
@@ -113,7 +114,7 @@ class Report(object):
                         str1 = value[row][2]
                         # 将unicode转换成中文
                         str2 = str(str1).replace('u\'', '\'')
-                        print(str2.decode("unicode-escape"))
+                        # print(str2.decode("unicode-escape"))
                         ws.write(row + start_row, 2, str2.decode("unicode-escape"),self.Set_Style('Arial', 200, 64))
                     elif col == 3:
                         if value[row][3] == 'PASS':
@@ -147,10 +148,17 @@ class Report(object):
 
     def Create_Excel_Report(self, suitename,filename):
         # Create Excel Report | ${filename}
+        # suitename = str(suitename)
+        filename = str(filename)
         file_date = 'Report\\'+ suitename + "_" + time.strftime("%Y%m%d-%H%M%S", time.localtime()) + '.xls'
         report_file = os.path.join(self.curr_dir, file_date)  # Default File Path
         lines = self.Read_From_File(filename)
         data = self.Reorganize_Data(lines)
         self.Write_To_Excel_File(report_file, data)
         self.Delete_Form_File(filename)
+
+if __name__ == '__main__':
+    Report = Report()
+    Report.Create_Excel_Report("suitename","total_result.txt")
+
 

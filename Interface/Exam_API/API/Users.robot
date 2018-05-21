@@ -14,7 +14,7 @@ GET/users/home
     [Return]    ${data}
 
 GET/users/me
-    [Arguments]    ${lat}    ${lon}
+    [Arguments]    ${lat}    ${lon}    #地点坐标，百度地图上找即可
     [Documentation]    首页我的详情
     Create Session    exam    ${url}
     ${headers}    Create Dictionary    Authorization    ${token}
@@ -34,11 +34,22 @@ GET/users/me/info
     [Return]    ${data}
 
 GET/users/share
-    [Arguments]    ${shareType}    ${pkLogId}
+    [Arguments]    ${shareType}    ${pkLogId}    #分享类型(PK,DATA)；pk结果id
     [Documentation]    小程序分享
     Create Session    exam    ${url}
     ${headers}    Create Dictionary    Authorization    ${token}
     ${params}    Create Dictionary    shareType    ${shareType}    pkLogId    ${pkLogId}
+    ${resp}=    Get Request    exam    /users/share    headers=${headers}    params=${params}
+    Should Be Equal As Strings    ${resp.status_code}    200
+    ${data}    to json    ${resp.content}
+    [Return]    ${data}
+
+GET/users/share_shareMark
+    [Arguments]    ${shareType}    ${shareMark}    #分享类型(PK,DATA)；pk结果id
+    [Documentation]    小程序分享
+    Create Session    exam    ${url}
+    ${headers}    Create Dictionary    Authorization    ${token}
+    ${params}    Create Dictionary    shareType    ${shareType}    shareMark    ${shareMark}
     ${resp}=    Get Request    exam    /users/share    headers=${headers}    params=${params}
     Should Be Equal As Strings    ${resp.status_code}    200
     ${data}    to json    ${resp.content}
@@ -63,7 +74,7 @@ GET/users/push
     [Return]    ${data}
 
 PUT/users/examTypes
-    [Arguments]    ${examTypeId}    ${recomment}
+    [Arguments]    ${examTypeId}    ${recomment}    #考试类型二级id；接受系统推荐考试类型 true ：接受 false和不填写为不接受
     [Documentation]    修改用户考试类型
     Create Session    exam    ${url}
     ${headers}    Create Dictionary    Authorization    ${token}
@@ -74,7 +85,7 @@ PUT/users/examTypes
     [Return]    ${data}
 
 PUT/users/subjects
-    [Arguments]    ${subjectId}
+    [Arguments]    ${subjectId}    #科目id
     [Documentation]    修改用户科目
     Create Session    exam    ${url}
     ${headers}    Create Dictionary    Authorization    ${token}
@@ -117,6 +128,39 @@ POST/users/survey
     \    Insert Into List    ${questions}    ${num}    ${question}
     ${params}    Create Dictionary    questions    ${questions}
     ${resp}=    POST Request    exam    /users/survey    headers=${headers}    data=${params}
+    Should Be Equal As Strings    ${resp.status_code}    200
+    ${data}    to json    ${resp.content}
+    [Return]    ${data}
+
+GET/users/posters
+    [Arguments]    ${writingsType}
+    [Documentation]    用户打卡图片集
+    Create Session    exam    ${url}
+    ${headers}    Create Dictionary    Authorization    ${token}
+    ${params}    Create Dictionary    writingsType    ${writingsType}
+    ${resp}=    Get Request    exam    /users/posters    headers=${headers}    params=${params}
+    Should Be Equal As Strings    ${resp.status_code}    200
+    ${data}    to json    ${resp.content}
+    [Return]    ${data}
+
+
+POST/users/unchainPaper
+    [Arguments]    ${encryptedData}    ${iv}    ${code}
+    [Documentation]    授权解锁 模拟试卷
+    Create Session    exam    ${url}
+    ${headers}    Create Dictionary    Authorization    ${token}    Content-Type    application/json
+    ${userCodeView}    Create Dictionary    encryptedData    ${encryptedData}    iv    ${iv}    code    ${code}
+    ${params}    Create Dictionary    userCodeView    ${userCodeView}
+    ${resp}=    POST Request    exam    /users/unchainPaper    headers=${headers}    data=${params}
+    Should Be Equal As Strings    ${resp.status_code}    200
+    ${data}    to json    ${resp.content}
+    [Return]    ${data}
+
+GET/users/support
+    [Documentation]    题库数据支持
+    Create Session    exam    ${url}
+    ${headers}    Create Dictionary    Authorization    ${token}
+    ${resp}=    Get Request    exam    /users/support    headers=${headers}
     Should Be Equal As Strings    ${resp.status_code}    200
     ${data}    to json    ${resp.content}
     [Return]    ${data}

@@ -9,8 +9,7 @@ GET/dailyPractice/examPapers
     [Documentation]    每日一练 任务列表：参数空代表当前时间
     Create Session    exam    ${url}
     ${header}    Create Dictionary    Authorization    ${token}
-    ${params}    Create Dictionary    year    ${year}    month    ${month}    number
-    ...    ${number}
+    ${params}    Create Dictionary    year    ${year}    month    ${month}    number    ${number}
     ${resp}=    Get Request    exam    /dailyPractice/examPapers    headers=${header}    params=${params}
     Should Be Equal As Strings    ${resp.status_code}    200
     ${data}    to json    ${resp.content}
@@ -25,7 +24,7 @@ GET/dailyPractice/calendar
     ${resp}=    Get Request    exam    /dailyPractice/calendar    headers=${header}    params=${params}
     Should Be Equal As Strings    ${resp.status_code}    200
     ${data}    to json    ${resp.content}
-    [Return]    ${data} }
+    [Return]    ${data}
 
 POST/dailyPractice/userClockIn
     [Documentation]    点击打卡 \ 文档中是PUT方式
@@ -43,4 +42,4 @@ GET/dailyPractice/clockInSum
     ${resp}=    Get Request    exam    /dailyPractice/clockInSum    headers=${header}
     Should Be Equal As Strings    ${resp.status_code}    200
     ${data}    to json    ${resp.content}
-    [Return]    ${data} }
+    [Return]    ${data}

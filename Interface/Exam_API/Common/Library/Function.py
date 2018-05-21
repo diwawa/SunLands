@@ -1,5 +1,6 @@
 # coding=utf-8
 import time
+import random
 
 
 class Function(object):
@@ -16,6 +17,13 @@ class Function(object):
         timestamp = int(time.mktime(timeArray))
 
         return timestamp
+
+    def getRandom(self, n1, n2):
+        u'''
+        获取n1到n2的随机整数
+        '''
+        return random.randint(n1,n2)
+
 
     def compareJsonkeys(self, assertJson, responseJson):
         u'''

@@ -1,8 +1,9 @@
 *** Settings ***
 Library           RequestsLibrary
+Library           Collections
 Variables         ../Common/Variables/Base.py
 
-*** keyword ***
+*** Keyword ***
 GET/answerPlans
     [Documentation]    答题计划
     Create Session    exam    ${url}
