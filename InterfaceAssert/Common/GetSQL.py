@@ -30,6 +30,7 @@ class GetSQL(object):
 		return sql
 
 	def subject(self, exam_type_id):
+		print "exam_type_id=",exam_type_id
 		mysql = MySQL()
 		sql = {}
 		fields = "id,subject_name,number"
@@ -47,6 +48,7 @@ class GetSQL(object):
 		:param user_id:
 		:return:  dict
 		'''
+		print "user_id=", user_id
 		mysql = MySQL()
 		sql = {}
 		fields = "head_image_url,nick_name,gender,location,phone_number,source"
@@ -63,6 +65,8 @@ class GetSQL(object):
 		:param user_id:
 		:return:  dict
 		'''
+		print "user_id=", user_id
+		print "exam_type_id=", exam_type_id
 		mysql = MySQL()
 		sql = {}
 		fields = "exam_type_id,secondary_categories,user_integral,level_id,subject_id,dan_grading_id,current_star,pk_sum,win_sum"
@@ -117,6 +121,7 @@ class GetSQL(object):
 		return sql
 
 	def userCartogram(self, user_id):
+		print "user_id=", user_id
 		mysql = MySQL()
 		sql = {}
 		fields = "answer_ration,diligent,accuracy,duration_ratio,score_ratio,question_sum"
@@ -128,6 +133,8 @@ class GetSQL(object):
 		return sql
 
 	def examShare(self, user_id,exam_type_id):
+		print "user_id=", user_id
+		print "exam_type_id=", exam_type_id
 		mysql = MySQL()
 		sql = {}
 		fields = "share_mark"
@@ -139,6 +146,8 @@ class GetSQL(object):
 		return sql
 
 	def pkQuestionCount(self, user_id, exam_type_id=0):
+		print "user_id=", user_id
+		print "exam_type_id=", exam_type_id
 		mysql = MySQL()
 		sql = {}
 		query_count = "SELECT * FROM pk_log_details WHERE del_flag=0 AND user_id=" + str(user_id)
@@ -162,6 +171,8 @@ class GetSQL(object):
 		return sql
 
 	def answerQuestionCount(self, user_id, exam_type_id=0):
+		print "user_id=", user_id
+		print "exam_type_id=", exam_type_id
 		mysql = MySQL()
 		sql = {}
 		query_count = "SELECT * FROM user_answer_details WHERE del_flag=0 AND user_answer_id IN (SELECT id FROM `user_answer` WHERE user_id=" + str(user_id) +")"
@@ -182,6 +193,7 @@ class GetSQL(object):
 		return sql
 
 	def pkLog(self,pk_log_id):
+		print "pk_log_id=", pk_log_id
 		mysql = MySQL()
 		sql = {}
 		fields = "win_user_id,pk_type,question_ids,surpass,head_img_urls"
@@ -218,6 +230,9 @@ class GetSQL(object):
 		return sql
 
 	def pkLogDetails(self, user_id,pk_log_id,question_id):
+		print "user_id=", user_id
+		print "pk_log_id=", pk_log_id
+		print "question_id=", question_id
 		mysql = MySQL()
 		sql = {}
 		fields = "user_answer,duration,score_add"
@@ -229,6 +244,7 @@ class GetSQL(object):
 		return sql
 
 	def question(self, question_id):
+		print "question_id=", question_id
 		mysql = MySQL()
 		sql = {}
 		fields = "id,question_type,question_desc,correct_answer,options_desc,correct_answer_desc"
@@ -307,6 +323,7 @@ class GetSQL(object):
 		return data
 
 	def dailyPractice(self,user_id):
+		print "user_id=", user_id
 		mysql = MySQL()
 		sql = {}
 		fields = "exam_type_id,subject_id"
@@ -341,6 +358,8 @@ class GetSQL(object):
 		return sql
 
 	def dailyPracticeAssignment(self,user_id,assignment_id):
+		print "user_id=", user_id
+		print "assignment_id=", assignment_id
 		mysql = MySQL()
 		sql = {}
 		fields = "subject_id,practice_ids,done_sum,assignment_name,question_sum,today_clock_in_sum,user_ids"
@@ -367,6 +386,7 @@ class GetSQL(object):
 
 
 	def chapter(self,user_id):
+		print "user_id=", user_id
 		mysql = MySQL()
 		sql = {}
 		fields = "exam_type_id,subject_id"
@@ -450,6 +470,9 @@ class GetSQL(object):
 		return sql
 
 	def lastUserQuestion(self,user_id,chapter_id,question_id=0):
+		print "user_id=", user_id
+		print "chapter_id=", chapter_id
+		print "question_id=", question_id
 		mysql = MySQL()
 		sql = {}
 		if question_id==0:
@@ -482,6 +505,7 @@ class GetSQL(object):
 		return sql
 
 	def examPapers(self,user_id):
+		print "user_id=", user_id
 		mysql = MySQL()
 		sql = {}
 		fields = "exam_type_id,subject_id"
