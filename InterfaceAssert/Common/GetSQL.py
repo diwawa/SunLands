@@ -541,6 +541,7 @@ class GetSQL(object):
 			query_ques = "SELECT id,question_desc FROM exam_question WHERE del_flag=0 AND id in (SELECT exam_question_id FROM `relation_exam_paper_question` WHERE exam_paper_id=" + str(exam_paper_id) + ") ORDER BY question_number"
 			result_ques = mysql.getAllRow(query_ques)
 			questonIds.append(result_ques[0])
+			print  query_ques
 		sql["isDone"] = isDone
 		sql["questonIds"] = questonIds
 
@@ -577,7 +578,7 @@ class GetSQL(object):
 
 if __name__ == '__main__':
 	# aa = GetSQL().lastUserQuestion(3,248363)
-	aa = GetSQL().question(14934)
+	aa = GetSQL().examPapers(3)
 	print aa
 
 
