@@ -254,6 +254,14 @@ class GetSQL(object):
 		for i in range(len(result)):
 			sql[listfields[i]] = result[i]
 
+		options_desc = sql['options_desc']
+		if "\'" in options_desc:
+			print 111
+			options_desc = options_desc.replace("\'","\"")
+		else:
+			pass
+		sql['options_desc'] = options_desc
+
 		query_1 = " SELECT * FROM `last_user_question` WHERE question_id=" + str(question_id) + " AND error_num>0"
 		query_4 = " SELECT * FROM `last_user_question` WHERE question_id=" + str(question_id)
 		query_2 = " SELECT * FROM `last_user_question` WHERE question_id=" + str(question_id) + " AND error_num>=2"
@@ -569,7 +577,7 @@ class GetSQL(object):
 
 if __name__ == '__main__':
 	# aa = GetSQL().lastUserQuestion(3,248363)
-	aa = GetSQL().userAlterableInfo(10279)
+	aa = GetSQL().question(14934)
 	print aa
 
 

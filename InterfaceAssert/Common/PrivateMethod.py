@@ -72,7 +72,6 @@ class PrivateMethod(object):
 		'''
 		grading = (u'黑铁', u'青铜', u'白银', u'黄金', u'铂金', u'钻石', u'星耀', u'王者')
 		star = (1, 2, 3, 5, 7, 9, 12, 100)
-		pkstar = 0
 
 		if str(results) in ("WIN", "WIN_MARGIN", "FINAL_HIT"):
 			pkstar = int(beforeStar) + 1
@@ -81,7 +80,7 @@ class PrivateMethod(object):
 		elif str(results) == "DRAW":
 			pkstar = int(beforeStar)
 		else:
-			pass
+			pkstar = int(beforeStar)
 
 		index = grading.index(beforeGrading)
 		if pkstar < 0:
