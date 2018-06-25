@@ -1,0 +1,4238 @@
+swagger: '2.0'
+info:
+  description: ''
+  version: 2.1.0
+  title: 题库api
+  termsOfService: 'http://swagger.io/terms/'
+  contact:
+    email: yangchao@sanlands.com
+host: 127.0.0.1
+basePath: /v1
+tags:
+  - name: Users
+    description: 用户
+  - name: ExamType
+    description: 考试类型
+  - name: Subject
+    description: 科目
+  - name: QuestionType
+    description: 考题类型
+  - name: UserClockIn
+    description: 打卡
+  - name: Level
+    description: 等级设置
+  - name: UserAnswer
+    description: 用户答题信息
+  - name: AnswerPlan
+    description: 答题计划
+  - name: PkArena
+    description: pk场
+  - name: Ranking
+    description: 排行榜
+  - name: DailyPractice
+    description: 每日一练
+  - name: WebSocketServer
+    description: 长连接
+  - name: PushMessage
+    description: 消息推送
+  - name: Activity
+    description: 活动
+  - name: IM
+    description: 聊天
+  - name: TRANS
+    description: 支付
+schemes:
+  - http
+paths:
+  /pushMessage/formid:
+    post:
+      tags:
+        - PushMessage
+      summary: 模版消息
+      description: ''
+      operationId: templateMessageParam
+      consumes:
+        - application/json
+      produces:
+        - '*/*'
+      parameters:
+        - in: body
+          name: pushWechatTemplateParam
+          description: 模版消息对象
+          schema:
+            type: object
+            description: 模版消息对象
+            properties:
+              messageType:
+                type: string
+                description: 消息类型;CLOCK_IN_REMIND-打卡提醒,CHAPTER_PRACTICE_REMIND-题库功能提醒
+              formId:
+                type: string
+                description: 微信formid
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: boolean
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  /users/token:
+    get:
+      tags:
+        - Users
+      summary: 微信登陆获取尚德token对（公众号不可用）
+      description: ''
+      operationId: loginUserAdd
+      consumes:
+        - application/json
+      produces:
+        - '*/*'
+      parameters:
+        - name: code
+          in: query
+          description: code
+          required: true
+          type: integer
+          format: int64
+        - name: encryptedData
+          in: query
+          description: code
+          required: false
+          type: integer
+          format: int64
+        - name: iv
+          in: query
+          description: code
+          required: false
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          schema:
+            properties:
+              token:
+                type: string
+                description: 服务器验证码
+              refreshToken:
+                type: string
+                description: refreshToken
+              isFirst:
+                type: boolean
+                description: 是否首次登录
+              needAuth:
+                type: boolean
+                description: 是否需要授权
+              showTip:
+                type: boolean
+                description: 是否需要版本提示
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  /users/token/refresh:
+    get:
+      tags:
+        - Users
+      summary: 换取新的尚德token对
+      description: ''
+      consumes:
+        - application/json
+      produces:
+        - '*/*'
+      parameters:
+        - name: token
+          in: query
+          description: token
+          required: true
+          type: string
+        - name: refreshToken
+          in: query
+          description: refreshToken
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            properties:
+              token:
+                type: string
+                description: 服务器验证码
+              refreshToken:
+                type: string
+                description: refreshToken
+              isFirst:
+                type: boolean
+                description: 是否首次登录
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  /users/home:
+    get:
+      tags:
+        - Users
+      summary: 欢迎页详情
+      description: 获取首页详情
+      operationId: usersHomeUsingGET
+      consumes:
+        - application/json
+      produces:
+        - '*/*'
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: object
+            description: data
+            properties:
+              nickName:
+                type: string
+                description: 用户昵称
+              headImageUrl:
+                type: string
+                description: 用户头像
+              totle:
+                type: integer
+                description: 登陆总次数
+              icons:
+                type: array
+                description: 用户头像url
+                items:
+                  type: string
+                  format: int64
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  /users/me:
+    get:
+      tags:
+        - Users
+      summary: 首页我的详情
+      description: 获取首页详情
+      operationId: homeUsingGET
+      consumes:
+        - application/json
+      produces:
+        - '*/*'
+      parameters:
+        - name: lat
+          in: query
+          description: 用户的坐标：纬度
+          required: false
+          type: string
+        - name: lon
+          in: query
+          description: 用户的坐标：经度
+          required: false
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/UserDemo'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  /users/me/info:
+    get:
+      tags:
+        - Users
+      summary: 我的数据
+      description: 获取我的数据
+      operationId: homeGetInfo
+      consumes:
+        - application/json
+      produces:
+        - '*/*'
+      parameters:
+        - name: mark
+          in: query
+          description:  用户分享标识
+          required: false
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/InfoDemo'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  /users/share:
+    get:
+      tags:
+        - Users
+      summary:  小程序分享
+      description: ''
+      operationId: userFriendShare
+      consumes:
+        - application/json
+      produces:
+        - '*/*'
+      parameters:
+        - name: shareType
+          in: query
+          description:  分享类型(PK,DATA)
+          required: true
+          type: string
+        - name: pkLogId
+          in: query
+          description:  pk结果id
+          required: false
+          type: integer
+      responses:
+        '200':
+          description: OK
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  /users/examPapers:
+    get:
+      tags:
+        - Users
+      summary: 首页试卷列表
+      description: 获取首页详情
+      operationId: usersExamPapersHomeUsingGET
+      consumes:
+        - application/json
+      produces:
+        - '*/*'
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/ExamPaperDemo'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  /users/push:
+    get:
+      tags:
+        - Users
+      summary: 首页推送消息集合
+      description: 获取首页详情
+      operationId: usersExampushPapersHomeUsingGET
+      consumes:
+        - application/json
+      produces:
+        - '*/*'
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/PushDemo'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  /users/examTypes:
+    put:
+      tags:
+        - Users
+      summary: 修改用户考试类型
+      description: 修改用户考试类型
+      parameters:
+        - name: examTypeId
+          in: query
+          description: 考试类型二级id
+          required: true
+          type: integer
+          format: int64
+        - name: recomment
+          in: query
+          description: 接受系统推荐考试类型 true ：接受  false和不填写为不接受
+          required: false
+          type: boolean
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: boolean
+  /users/subjects:
+    put:
+      tags:
+        - Users
+      summary: 修改用户科目
+      description: 修改用户科目
+      parameters:
+        - name: subjectId
+          in: query
+          description: 科目id
+          required: true
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: boolean
+  '/users/conllects/{questionId}':
+    post:
+      tags:
+        - Users
+      summary: 用户收藏
+      description: ''
+      operationId: collectUserAdd
+      consumes:
+        - application/json
+      produces:
+        - '*/*'
+      parameters:
+        - name: questionId
+          in: path
+          description: 题目id
+          required: true
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: boolean
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  /users/advice:
+    post:
+      tags:
+        - Users
+      summary: 用户意见反馈
+      description: ''
+      operationId: adviceUserAdd
+      consumes:
+        - application/json
+      produces:
+        - '*/*'
+      parameters:
+        - name: content
+          in: query
+          description: 反馈内容
+          required: true
+          type: integer
+          format: int64
+        - name: userIp
+          in: query
+          description: 用户IP地址
+          required: true
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: boolean
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  /users/survey:
+    post:
+      tags:
+        - Users
+      summary: 用户测试数据提交
+      description: 用户测试数据提交
+      parameters:
+        - in: body
+          name: userSurveyView
+          description: 测试用户答题结果
+          schema:
+            type: object
+            description: 答题对象
+            properties:
+              questions:
+                type: array
+                description: 测试信息
+                items:
+                  properties:
+                    questionId:
+                      type: string
+                      description: 题目id
+                    answerDesc:
+                      type: string
+                      description: 作答答案
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: object
+            description: 返回测试数据
+            properties:
+              examTypeId:
+                type: integer
+                description: 推荐的考试类型Id
+              primaryCategories:
+                type: string
+                description: 考试类型名称
+              msg:
+                type: string
+                description: 描述 （思维活跃的你适合。。。）
+  /users/posters:
+    get:
+      tags:
+        - Users
+      summary: 用户打卡图片集
+      description: 用户打卡图片集
+      parameters:
+        - name: writingsType
+          in: query
+          description: xx篇 ELITE("名校篇"),
+                            CELEBRITY("名人篇"),
+                            FORTUNE("运势篇"),
+                            FESTIVAL("节日篇"),
+                            LITERATURE("文学篇"),
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: object
+            description: 打卡图片集
+            properties:
+              GENERAL:
+                type: array
+                description: 普通
+                items:
+                  properties:
+                    postersName:
+                      type: string
+                      description: 图片名称
+                    postersUrl:
+                      type: string
+                      description: 图片url
+                    clockInlist:
+                      type: array
+                      description: 打卡记录集合
+                      items:
+                        properties:
+                          clockInSum:
+                            type: integer
+                            description: 打卡总数
+                          clockInDate:
+                            type: string
+                            description: 打卡日期
+              RARE:
+                type: array
+                description: 稀有
+                items:
+                  properties:
+                    postersName:
+                      type: string
+                      description: 图片名称
+                    postersUrl:
+                      type: string
+                      description: 图片url
+                    clockInlist:
+                      type: array
+                      description: 打卡记录集合
+                      items:
+                        properties:
+                          clockInSum:
+                            type: integer
+                            description: 打卡总数
+                          clockInDate:
+                            type: string
+                            description: 打卡日期
+              UNCOMMON:
+                type: array
+                description: 罕见
+                items:
+                  properties:
+                    postersName:
+                      type: string
+                      description: 图片名称
+                    postersUrl:
+                      type: string
+                      description: 图片url
+                    clockInlist:
+                      type: array
+                      description: 打卡记录集合
+                      items:
+                        properties:
+                          clockInSum:
+                            type: integer
+                            description: 打卡总数
+                          clockInDate:
+                            type: string
+                            description: 打卡日期
+              LEGEND:
+                type: array
+                description: 传奇
+                items:
+                  properties:
+                    postersName:
+                      type: string
+                      description: 图片名称
+                    postersUrl:
+                      type: string
+                      description: 图片url
+                    clockInlist:
+                      type: array
+                      description: 打卡记录集合
+                      items:
+                        properties:
+                          clockInSum:
+                            type: integer
+                            description: 打卡总数
+                          clockInDate:
+                            type: string
+                            description: 打卡日期
+  /users/unchainPaper:
+    post:
+      tags:
+        - Users
+      summary: 授权解锁 模拟试卷
+      description: ''
+      parameters:
+        - in: body
+          name : userCodeView
+          description: 授权code 信息
+          required: false
+          schema:
+            type: object
+            description:  code信息
+            properties:
+              encryptedData:
+                type: string
+                description: encryptedData
+              iv:
+                type: string
+                description: iv
+              code:
+                type: string
+                description: code
+              unchainType:
+                type: string
+                description: "share : 二维码分享， phoneNumber : 电话号码"
+      responses:
+        '200':
+          description: OK
+  /users/support:
+    get:
+      tags:
+        - Users
+      summary: 题库数据支持
+      description: ''
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/SupportDemo'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+
+  /questionTypes/chapters:
+    get:
+      tags:
+        - QuestionType
+      summary: 章节列表 （章节练习/只做错题/我的收藏/我的错题）
+      description: ''
+      operationId: chaptersUserAdd
+      consumes:
+        - application/json
+      produces:
+        - '*/*'
+      parameters:
+        - name: planType
+          in: query
+          description: 'CHAPTER_PRACTICE("章节练习"),
+                        ONLY_WRONG_PRACTICE("只做错题"),
+                        MY_COLLECT("我的收藏"),
+                        MY_WRONG("我的错题");'
+          required: true
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: object
+            description: 章节
+            properties:
+              errorSum:
+                type: integer
+                description: 章节总题目错误数
+              chapters:
+                type: array
+                items:
+                  $ref: '#/definitions/ChapterDemo'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  '/questionTypes/myQuestionStem/{chapterId}':
+    get:
+      tags:
+        - QuestionType
+      summary: 我的收藏列表/我的错题列表
+      description: ''
+      operationId: collectUserGetAdd
+      consumes:
+        - application/json
+      produces:
+        - '*/*'
+      parameters:
+        - name: chapterId
+          in: path
+          description: 章节id
+          required: true
+          type: integer
+          format: int64
+        - name: planType
+          in: query
+          description: 'MY_COLLECT("我的收藏"),
+                        MY_WRONG("我的错题");'
+          required: true
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              type: object
+              description: OK
+              properties:
+                questionId:
+                  type: string
+                  description: 题目id
+                questionDesc:
+                  type: string
+                  description: 题目名称
+                date:
+                  type: string
+                  description: 时间
+                errorNum:
+                  type: integer
+                  description: 错误个数
+                collectNum:
+                  type: integer
+                  description: 收藏个数
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  /questionTypes/examPapers:
+    get:
+      tags:
+        - QuestionType
+      summary: 套卷模拟列表
+      description: ''
+      operationId: completessUserAdd
+      consumes:
+        - application/json
+      produces:
+        - '*/*'
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/ExamPaperDemo'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  /questionTypes/examPapers/history:
+    get:
+      tags:
+        - QuestionType
+      summary: 套卷模拟历史纪录
+      description: ''
+      operationId: completesHistoryUserAdd
+      consumes:
+        - application/json
+      produces:
+        - '*/*'
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/ExamPaperHistoryDemoTwo'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  '/questionTypes/examQuestion':
+    get:
+      tags:
+        - QuestionType
+      summary: 题目详情 (8种类型)
+      consumes:
+        - application/json
+      produces:
+        - '*/*'
+      parameters:
+        - name: planType
+          in: query
+          description:  'DAILY_PRACTICE("每日一练"),
+                        CHAPTER_PRACTICE("章节练习"),
+                        SIMULATION_EXAM("模拟套题"),
+                        RANDOM_PRACTICE("随手练"),
+                        ONLY_WRONG_PRACTICE("只做错题"),
+                        HIGH_WRONG_PRACTICE("高频错题"),
+                        MY_COLLECT("我的收藏"),
+                        MY_WRONG("我的错题");'
+          enum:
+          - 'DAILY_PRACTICE'
+          - 'CHAPTER_PRACTICE'
+          - 'SIMULATION_EXAM'
+          - 'RANDOM_PRACTICE'
+          - 'ONLY_WRONG_PRACTICE'
+          - 'HIGH_WRONG_PRACTICE'
+          - 'MY_COLLECT'
+          - 'MY_WRONG'
+          required: true
+          type: string
+          format: int64
+        - name: needAnswer
+          in: query
+          description: 0,不需要答案  1,需要答案（我的收藏，我的错题必传答案）
+          required: true
+          type: integer
+          format: int64
+        - name: needHistory
+          in: query
+          description: 0,不需要作答记录  1,需要作答记录
+          required: true
+          type: integer
+          format: int64
+        - name: needError
+          in: query
+          description: 0,看全部题目解析  1,只看错题解析
+          required: false
+          type: integer
+          format: int64
+        - name: stratumId
+          in: query
+          description: 层级id（章节id / 试卷id / 题干id / 每日一练任务Id）
+          required: false
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/ExamQuestionDemo'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  '/questionTypes/next':
+    post:
+      tags:
+        - QuestionType
+      summary: 题目下一阶段
+      consumes:
+        - application/json
+      produces:
+        - '*/*'
+      parameters:
+        - name: planType
+          in: query
+          description:  CHAPTER_PRACTICE("章节练习"),
+                        ONLY_WRONG_PRACTICE("只做错题"),
+                        HIGH_WRONG_PRACTICE("高频错题"),
+          required: true
+          type: string
+          format: int64
+        - name: chapterId
+          in: query
+          description:  CHAPTER_PRACTICE("章节练习"),
+                        ONLY_WRONG_PRACTICE("只做错题"),
+                        HIGH_WRONG_PRACTICE("高频错题"),
+          required: false
+          type: string
+          format: int64
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: boolean
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  /examTypes:
+    get:
+      tags:
+        - ExamType
+      summary: 查询考试类型列表
+      description: 查询考试类型列表
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/ExamTypeItem'
+  /subjects:
+    get:
+      tags:
+        - Subject
+      summary: 根据考试类型id查询科目列表
+      description: 根据考试类型id查询科目列表
+      parameters:
+        - name: examTypeId
+          in: query
+          description: 考试类型id
+          required: false
+          type: string
+          format: int32
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/SubjectItem'
+  /userAnswer:
+    post:
+      tags:
+        - UserAnswer
+      summary: 判题请求
+      description: 提交试卷作答信息
+      parameters:
+        - in: body
+          name: userAnswerPostParam
+          description: 答题对象
+          schema:
+            type: object
+            description: 答题对象
+            properties:
+              userAnswerId:
+                type: integer
+                description: 答题历史记录id
+              answerPlanId:
+                type: integer
+                description: 答题计划id
+              assignmentId:
+                type: integer
+                description: '任务Id 没有可为空'
+              planType:
+                type: string
+                description:  'DAILY_PRACTICE("每日一练"),
+                        CHAPTER_PRACTICE("章节练习"),
+                        SIMULATION_EXAM("模拟套题"),
+                        RANDOM_PRACTICE("随手练"),
+                        ONLY_WRONG_PRACTICE("只做错题"),
+                        HIGH_WRONG_PRACTICE("高频错题");'
+              examPaperId:
+                type: integer
+                description: '试卷id,没有可为空'
+              chapterId:
+                type: integer
+                description: '章节id,章节练习不可为空'
+              duration:
+                type: integer
+                description: 本次提交答题计划整体答题时长
+              userId:
+                type: integer
+                format: int64
+                description: 用户id
+              questions:
+                type: array
+                description: 作答信息
+                items:
+                  properties:
+                    questionId:
+                      type: string
+                      description: 题目id
+                    answerDesc:
+                      type: string
+                      description: 作答答案
+                    answerDate:
+                      type: string
+                      description: 作答时间
+                    duration:
+                      type: integer
+                      description: 答题时长
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: object
+            description: 用户答题历史
+            properties:
+              userAnswerId:
+                type: integer
+                description: 用户答题历史id
+  /userAnswer/{userAnswerId}:
+    get:
+      tags:
+        - UserAnswer
+      summary: 获取判题信息,历史答题记录
+      description: 获取判题后的信息
+      parameters:
+        - name: userAnswerId
+          in: path
+          description: 用户答题历史id
+          required: true
+          type: integer
+          format: int64
+        - name: infoType
+          in: query
+          type: string
+          required: true
+          description: >-
+            获取结果类型：1.answerDone - 答题后获取判题结果;2.answerHistory -  获取历史答题记录结果页;
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: object
+            description: 判题结果
+            properties:
+              userAnswerId:
+                type: integer
+                description: 用户答题id
+              answerPlanId:
+                type: integer
+                description: 答题计划id
+              planType:
+                type: string
+                description: >-
+                  答题计划六种类型:dailyPractice,chapterPractice,simulationExam,randomPractice,onlyWrongPractice,highWrongPractice
+              examPaperId:
+                type: integer
+                description: '试卷id,没有可为空'
+              duration:
+                type: integer
+                description: 本次提交答题计划整体答题时长
+              userId:
+                type: integer
+                format: int64
+                description: 用户id
+              clockIn:
+                type: integer
+                format: int64
+                description: 判断继续练习，还是去打卡 1 去打卡 2 继续练习
+              score:
+                type: integer
+                description: 得分
+              correctRate:
+                type: integer
+                description: 正确率
+              wrongRate:
+                type: integer
+                description: 答错率
+              wrongCount:
+                type: integer
+                description: 答错次数
+              level:
+                type: integer
+                description: 级别
+              integralAdd:
+                type: integer
+                description: 本次增长分值
+              levelView:
+                type: array
+                description: 等级信息
+                items:
+                  properties:
+                    levelNum:
+                      type: string
+                      description: 等级数字
+                    levelName:
+                      type: string
+                      description: 等级名称,如：Lv.1,Lv.2
+                    maxIntegral:
+                      type: string
+                      description: 当前等级最高分值
+                    currentIntegral:
+                      type: string
+                      description: 当前积分
+              questions:
+                type: array
+                description: 作答信息
+                items:
+                  properties:
+                    questionId:
+                      type: string
+                      description: 题目id
+                    answerDesc:
+                      type: string
+                      description: 作答答案
+                    answerDate:
+                      type: string
+                      description: 作答时间
+                    duration:
+                      type: integer
+                      description: 答题时长
+                    answerCorrect:
+                      type: boolean
+                      description: 是否正确
+                    correctAnswer:
+                      type: string
+                      description: 正确答案
+                    correctAnswerDesc:
+                      type: string
+                      description: 错题解析
+  /answerPlans:
+    get:
+      tags:
+        - AnswerPlan
+      summary: 个人答题计划生成确认
+      description: '个人答题计划生成确认,生成时机：1.用户初次登录，生成所有答题模块的答题计划；2.用户每天首次登录，自动生成'
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: object
+            description: data
+            properties:
+              dailyPractice:
+                type: boolean
+                description: 每日一练
+              chapterPractice:
+                type: boolean
+                description: 章节练习
+              simulationExam:
+                type: boolean
+                description: 套卷模拟
+              randomPractice:
+                type: boolean
+                description: 随手练
+              onlyWrongPractice:
+                type: boolean
+                description: 只做错题
+              highWrongPractice:
+                type: boolean
+                description: 高频错题
+              answerPlanId:
+                type: integer
+                description: 答题计划id
+  /userClockIn:
+    post:
+      tags:
+        - UserClockIn
+      summary: 每日打卡
+      description: 打卡
+      parameters:
+        - name: userId
+          in: query
+          description: 用户id
+          required: false
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: boolean
+            description: data
+  /userClockInRecord:
+    get:
+      tags:
+        - UserClockIn
+      summary: 打卡记录
+      description: 打卡记录
+      parameters:
+        - name: userId
+          in: query
+          description: 用户id
+          required: false
+          type: integer
+          format: int64
+        - name: month
+          in: query
+          description: 查询打卡月份
+          type: integer
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            description: '打卡日期数组 [1,2,3,4,10]'
+            items:
+              type: string
+              description: sd
+  /pkArena/me:
+    get:
+      tags:
+        - PkArena
+      summary: pk场，显示当前用户信息
+      description: 进入pk场,，显示当前用户信息
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: object
+            description: pk场当前用户信息
+            properties:
+              userId:
+                type: integer
+                description: 用户id
+              headImgUrl:
+                type: integer
+                description: 用户头像url
+              levelNum:
+                type: integer
+                description: 用户等级
+              nickName:
+                type: integer
+                description: 用户昵称
+              shareMark:
+                type: string
+                description: 分享标识
+              danGradingView:
+                type: object
+                description: 段位信息
+                properties:
+                  danGradingName:
+                    type: string
+                    description: 段位名称
+                  currentStar:
+                    type: string
+                    description: 当前星数
+                  pkSum:
+                    type: string
+                    description: pk总数
+                  winSum:
+                    type: string
+                    description: 胜场数
+                  winRate:
+                    type: string
+                    description: 胜率
+  /pkArena/join:
+    post:
+      tags:
+        - PkArena
+      summary: 好友对战，加入pk场
+      description: 好友对战，加入pk场
+      parameters:
+        - name: shareMark
+          in: query
+          description: 分享标识(识别用户),点击分享的必填
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: object
+            description: 显示当前用户、分享者的信息
+            properties:
+              isMe:
+                type: boolean
+                description: 是否自己点击自己分享
+              status:
+                type: string
+                description: SELF_SUCCESS("自我挑战,加入成功"),
+                             SELF_FAIL("自我挑战，加入失败"),
+                             FRIEND("在线对战");
+              targetUserView:
+                type: object
+                description: 分享者用户信息
+                properties:
+                  userId:
+                    type: integer
+                    description: 用户id
+                  headImgUrl:
+                    type: string
+                    description: 用户头像url
+                  levelNum:
+                    type: integer
+                    description: 用户等级
+                  nickName:
+                    type: string
+                    description: 用户昵称
+                  sharePkLogScore:
+                    type: integer
+                    description: 分享信息分数
+                  danGradingView:
+                    type: object
+                    description: 段位信息
+                    properties:
+                      danGradingName:
+                        type: string
+                        description: 段位名称
+                      currentStar:
+                        type: string
+                        description: 当前星数
+              currentUserView:
+                type: object
+                description: 当前用户信息
+                properties:
+                  userId:
+                    type: integer
+                    description: 用户id
+                  headImgUrl:
+                    type: string
+                    description: 用户头像url
+                  levelNum:
+                    type: integer
+                    description: 用户等级
+                  nickName:
+                    type: string
+                    description: 用户昵称
+                  danGradingView:
+                    type: object
+                    description: 段位信息
+                    properties:
+                      danGradingName:
+                        type: string
+                        description: 段位名称
+                      currentStar:
+                        type: string
+                        description: 当前星数
+  /pkArena/target:
+    get:
+      tags:
+        - PkArena
+      summary: 进入pk场,显示对方用户信息
+      description: 进入pk场,显示对方用户信息
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: object
+            description: pk场对方用户信息
+            properties:
+              userId:
+                type: integer
+                description: 用户id
+              headImgUrl:
+                type: integer
+                description: 用户头像url
+              levelNum:
+                type: integer
+                description: 用户等级
+              nickName:
+                type: integer
+                description: 用户昵称
+              danGradingView:
+                type: object
+                description: 段位信息
+                properties:
+                  danGradingName:
+                    type: string
+                    description: 段位名称
+                  currentStar:
+                    type: string
+                    description: 当前星数
+                  pkSum:
+                    type: string
+                    description: pk总数
+                  winSum:
+                    type: string
+                    description: 胜场数
+                  winRate:
+                    type: string
+                    description: 胜率
+  /pkArena/pkMatch:
+    get:
+      tags:
+        - PkArena
+      summary: 匹配对手 / 点击分享链接
+      description: 匹配对手 或 点击分享链接，显示当前用户、分享者的信息(首次登录需要授权)
+      parameters:
+        - name: shareMark
+          in: query
+          description: 分享标识(识别用户),点击分享的必填
+          required: false
+          type: string
+        - name: selfPlay
+          in: query
+          description: 是否开始自我挑战模式
+          required: false
+          type: boolean
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: object
+            description: 显示当前用户、分享者的信息
+            properties:
+              pkLogId:
+                type: integer
+                description: pk记录id
+              targetUserView:
+                type: object
+                description: 分享者用户信息
+                properties:
+                  userId:
+                    type: integer
+                    description: 用户id
+                  headImgUrl:
+                    type: string
+                    description: 用户头像url
+                  levelNum:
+                    type: integer
+                    description: 用户等级
+                  nickName:
+                    type: string
+                    description: 用户昵称
+                  sharePkLogScore:
+                    type: integer
+                    description: 分享信息分数
+                  danGradingView:
+                    type: object
+                    description: 段位信息
+                    properties:
+                      danGradingName:
+                        type: string
+                        description: 段位名称
+                      currentStar:
+                        type: string
+                        description: 当前星数
+              currentUserView:
+                type: object
+                description: 当前用户信息
+                properties:
+                  userId:
+                    type: integer
+                    description: 用户id
+                  headImgUrl:
+                    type: string
+                    description: 用户头像url
+                  levelNum:
+                    type: integer
+                    description: 用户等级
+                  nickName:
+                    type: string
+                    description: 用户昵称
+                  danGradingView:
+                    type: object
+                    description: 段位信息
+                    properties:
+                      danGradingName:
+                        type: string
+                        description: 段位名称
+                      currentStar:
+                        type: string
+                        description: 当前星数
+  /pkArena/quit:
+    post:
+      tags:
+        - PkArena
+      summary: pk场
+      description: 中途退出,显示当前用户信息
+      parameters:
+        - name: pkLogId
+          in: query
+          description: pk记录id
+          required: false
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: object
+            description: pk场当前用户信息
+            properties:
+              userId:
+                type: integer
+                description: 用户id
+              headImgUrl:
+                type: integer
+                description: 用户头像url
+              levelNum:
+                type: integer
+                description: 用户等级
+              nickName:
+                type: integer
+                description: 用户昵称
+              danGradingView:
+                type: object
+                description: 段位信息
+                properties:
+                  danGradingName:
+                    type: string
+                    description: 段位名称
+                  currentStar:
+                    type: string
+                    description: 当前星数
+                  pkSum:
+                    type: string
+                    description: pk总数
+                  winSum:
+                    type: string
+                    description: 胜场数
+                  winRate:
+                    type: string
+                    description: 胜率
+  /pkArena/pkQuestions:
+    get:
+      tags:
+        - PkArena
+      summary: 查询pk场下一题信息
+      description: 查询pk场下一题信息
+      parameters:
+        - name: pkLogId
+          in: query
+          description: pk记录id
+          required: true
+          type: integer
+          format: int64
+        - name: questionId
+          in: query
+          description: 题目id,请求第一题时为空
+          required: false
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: object
+            description: 查询pk题目信息
+            properties:
+              questionSum:
+                type: integer
+                description: 总共多少题
+              questionCurrentNum:
+                type: integer
+                description: 当前第几题
+              targetUserDuration:
+                type: integer
+                description: 对方耗时
+              targetUserScore:
+                type: integer
+                description: 对方本题得分
+              targetUserScoreSum:
+                type: integer
+                description: 对方本局总得分
+              currentUserScoreSum:
+                type: integer
+                description: 自己本局总得分
+              questionId:
+                type: integer
+                description: 题目id
+              questionDesc:
+                type: string
+                description: 题目内容
+              questionType:
+                type: string
+                description: 'SINGLE_ANSWER("单选题"),
+        MULTIPLE_ANSWER("多选题"),
+        JUDGE_ANSWER("判断提"),
+        SHORT_ANSWER("简答题");'
+              options:
+                type: array
+                items:
+                  type: object
+                  description: 题目答案
+                  properties:
+                    option:
+                      type: string
+                      description: 选项
+                    optionDesc:
+                      type: string
+                      description: 选项内容
+  /pkArena/pkAnswer:
+    post:
+      tags:
+        - PkArena
+      summary: 提交答案
+      description: 每题提交一次答案
+      parameters:
+        - in: body
+          name: pkAnswerPostParam
+          description: 答题对象
+          schema:
+            type: object
+            description: 答题对象
+            properties:
+              pkLogId:
+                type: integer
+                description: pk记录id
+              questionId:
+                type: integer
+                description: 题目id
+              currentUserAnswer:
+                type: string
+                description: 当前用户作答答案
+              currentUserDuration:
+                type: integer
+                description: 当前用户耗时
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: object
+            description: 当前用户、对方用户判题后信息
+            properties:
+              currentUserScore:
+                type: integer
+                description: 当前用户本题得分
+              currentUserScoreSum:
+                type: integer
+                description: 当前用户本局总得分
+              targetUserAnswer:
+                type: string
+                description: 对方作答答案
+              correctAnswer:
+                type: string
+                description: 正确答案
+  /pkArena/targetAnswerDetail   :
+    get:
+      tags:
+        - PkArena
+      summary: 查询对手答题详情
+      description: 查询对手答题详情
+      parameters:
+        - name: pkLogId
+          in: query
+          description: pk记录id
+          required: true
+          type: integer
+          format: int64
+        - name: questionId
+          in: query
+          description: 题目id,请求第一题时为空
+          required: false
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: object
+            description: 查询pk题目信息
+            properties:
+              targetUserScore:
+                type: integer
+                description: 对方用户本题得分
+              targetUserDuration:
+                type: integer
+                description: 对方用户耗时
+              targetUserScoreSum:
+                type: integer
+                description: 对方用户当前总得分
+              targetUserAnswer:
+                type: string
+                description: 对方用户作答答案
+              correctAnswer:
+                type: string
+                description: 本题正确答案
+  /pkArena/danGradingTips:
+    get:
+      tags:
+        - PkArena
+      summary: 段位升降提示
+      description: 段位升降提示
+      parameters:
+        - name: pkLogId
+          in: query
+          description: pk记录id
+          required: true
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: object
+            description: 显示当前用户、分享者的信息
+            properties:
+              danGradingName:
+                type: string
+                description: 段位名称
+              integral:
+                type: integer
+                description: 奖励成长值
+  /pkArena/pkDynamicImg/{userId}/{pkLogId}:
+    get:
+      tags:
+        - PkArena
+      summary: pk结果动态图片
+      description: pk结果动态图片
+      parameters:
+        - name: userId
+          in: path
+          description: pk记录id
+          required: true
+          type: integer
+          format: int64
+        - name: pkLogId
+          in: path
+          description: pk记录id
+          required: true
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+  /pkArena/pkFinal:
+    get:
+      tags:
+        - PkArena
+      summary: pk结果
+      description: pk结果
+      parameters:
+        - name: pkLogId
+          in: query
+          description: pk记录id
+          required: true
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: object
+            description: 显示当前用户、对手的信息
+            properties:
+              pkLogId:
+                type: integer
+                description: pk记录id
+              userId:
+                type: integer
+                description: 用户id
+              winRinkingInfo:
+                type: object
+                description: 胜利者超越排名信息
+                properties:
+                  surpass:
+                    type: integer
+                    description: 超越多少名
+                  headImgUrls:
+                    type: array
+                    description: 用户头像url
+                    items:
+                      type: string
+                      format: int64
+              targetUserView:
+                type: object
+                description: 分享者用户信息
+                properties:
+                  userId:
+                    type: integer
+                    description: 用户id
+                  headImgUrl:
+                    type: string
+                    description: 用户头像url
+                  levelNum:
+                    type: integer
+                    description: 用户等级
+                  nickName:
+                    type: string
+                    description: 用户昵称
+                  userScoreSum:
+                    type: integer
+                    description: 对方本局总得分
+                  danGradingView:
+                    type: object
+                    description: 段位信息
+                    properties:
+                      danGradingName:
+                        type: string
+                        description: 段位名称
+                      currentStar:
+                        type: string
+                        description: 当前星数
+              currentUserView:
+                type: object
+                description: 当前用户信息
+                properties:
+                  results:
+                    type: string
+                    description: WIN-胜，WIN_MARGIN-险胜，FINAL_HIT-绝杀，LOSE-失败，DRAW-平局
+                  userId:
+                    type: integer
+                    description: 用户id
+                  headImgUrl:
+                    type: string
+                    description: 用户头像url
+                  levelNum:
+                    type: integer
+                    description: 用户等级
+                  nickName:
+                    type: string
+                    description: 用户昵称
+                  userScoreSum:
+                    type: integer
+                    description: 当前用户本局总得分
+                  danGradingView:
+                    type: object
+                    description: 段位信息
+                    properties:
+                      danGradingName:
+                        type: string
+                        description: 段位名称
+                      currentStar:
+                        type: string
+                        description: 当前星数
+                      beforeStar:
+                        type: integer
+                        description: pk前星数
+  /ranking/pkArena:
+    get:
+      tags:
+        - Ranking
+      summary: 排行榜-pk场
+      description: 排行榜-pk场
+      parameters:
+        - in: query
+          name: filter
+          type: string
+          required: true
+          description: 过滤条件；friends-好友排行；nationwide-全国排行
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              type: object
+              description: 好友排行
+              properties:
+                rankingNum:
+                  type: integer
+                  description: 排行num
+                currentUser:
+                  type: boolean
+                  description: 是否当前用户
+                userView:
+                  type: object
+                  description: 用户信息
+                  properties:
+                    headImgUrl:
+                      type: string
+                      description: 头像url
+                    nickName:
+                      type: string
+                      description: 昵称
+                    levelNum:
+                      type: integer
+                      description: 等级num
+                danGradingView:
+                  type: object
+                  description: 题目id
+                  properties:
+                    danGradingName:
+                      type: string
+                      description: 段位名称
+                    currentStar:
+                      type: integer
+                      description: 当前星数
+  /ranking/persional:
+    get:
+      tags:
+        - Ranking
+      summary: 排行榜-个人
+      description: 排行榜-个人
+      parameters:
+        - in: query
+          name: filter
+          type: string
+          required: true
+          description: 过滤条件；local-本省排行；nationwide-全国排行
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: object
+            description: 本地-全国排行
+            properties:
+                currentUser:
+                  type: object
+                  description: 当前用户信息
+                  properties:
+                    headImgUrl:
+                      type: string
+                      description: 头像url
+                    nickName:
+                      type: string
+                      description: 昵称
+                    levelNum:
+                      type: integer
+                      description: 等级num
+                    thisWeekScore:
+                      type: string
+                      description: 本周答对
+                userViewList:
+                  type: array
+                  description: 用户排行信息
+                  items:
+                       properties:
+                        rankNum:
+                          type: string
+                          description: 排名
+                        headImgUrl:
+                          type: string
+                          description: 头像url
+                        nickName:
+                          type: string
+                          description: 昵称
+                        levelNum:
+                          type: integer
+                          description: 等级num
+                        thisWeekScore:
+                          type: string
+                          description: 本周答对
+  /ranking/provice/list:
+   get:
+      tags:
+        - Ranking
+      summary: 排名-省份目录
+      description: 排名-省份目录
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            description: 排名-省份目录
+            items:
+              properties:
+                    zn_name:
+                      type: string
+                      description: 中文省份名称
+                    en_name:
+                      type: string
+                      description: 英文省份名称
+  /webSocketServer/pk:
+    get:
+      tags:
+        - WebSocketServer
+      summary: pk在线状态，等待匹配对手
+      description: pk在线状态，等待匹配对手
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: object
+            description: 好友排行
+            properties:
+              FIND:
+                type: string
+                description: "说明:找到对手;
+          调用:/pkArena/target    ;
+                备注:进入pk场,显示对方用户信息（新接口）;"
+              START:
+                type: string
+                description: "说明:
+匹配对手 / 点击分享链接;
+          调用:/pkArena/pkMatch
+    ;
+          备注:匹配对手 / 点击分享链接;"
+              NEXT:
+                type: string
+                description: "说明:双方答题就行，开始下一题;
+          调用:/pkArena/pkQuestions    ;
+                备注:查询pk场第二或第十区间问题;"
+              READY :
+                type: string
+                description: "说明:对手答题就绪;
+          调用:/pkArena/targetAnswerDetail    ;
+                备注:查询对手答题详情 （新接口）;"
+              END:
+                type: string
+                description: 说明:结束，所有题目回答完毕;
+              ERROR:
+                type: string
+                description: 程序异常，比赛中断
+              JOIN_ERROR:
+                type: string
+                description: 加入失败
+              MARK_TIMEOUT:
+                type: string
+                description: 分享mark过期
+              GIVE_UP:
+                type: string
+                description: 对方放弃对战或掉线
+  /pkArena/pkFinal/share:
+    get:
+      tags:
+        - PkArena
+      summary: pk结果分享
+      description: pk结果
+      parameters:
+        - name: shareMark
+          in: query
+          description: 分享标识(识别用户),点击分享的必填
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: object
+            description: 显示当前用户、对手的信息
+            properties:
+              shareUserView:
+                type: object
+                description: 分享者用户信息
+                properties:
+                  headImgUrl:
+                    type: string
+                    description: 用户头像url
+                  levelNum:
+                    type: integer
+                    description: 用户等级
+                  nickName:
+                    type: string
+                    description: 用户昵称
+                  scoreSum:
+                    type: integer
+                    description: 分享者本局总得分
+                  danGradingName:
+                        type: string
+                        description: 段位名称
+                  startNum:
+                        type: string
+                        description: 当前星星数量
+              currentUserView:
+                type: object
+                description: 分享者用户信息
+                properties:
+                  headImgUrl:
+                    type: string
+                    description: 用户头像url
+                  levelNum:
+                    type: integer
+                    description: 用户等级
+                  nickName:
+                    type: string
+                    description: 用户昵称
+                  danGradingName:
+                    type: string
+                    description: 段位名称
+                  startNum:
+                    type: string
+                    description: 当前星星数量
+  /dailyPractice/examPapers:
+    get:
+      tags:
+        - DailyPractice
+      summary: 每日一练任务列表
+      description: 每日一练任务list
+      parameters:
+        - name: year
+          in: query
+          description: 请求的年（默认本年）
+          required: false
+          type: integer
+          format: int64
+        - name: month
+          in: query
+          description: 请求的月（默认本月）
+          required: false
+          type: integer
+          format: int 64
+        - name: number
+          in: query
+          description: 请求的日（默认本日）
+          required: false
+          type: integer
+          format: int 64
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: object
+            description: 任务列表
+            properties:
+              schedult:
+                type: string
+                description: 今日进度
+              clockInSum:
+                type: integer
+                description: 本人打卡总数
+              donesum:
+                type: integer
+                description: 今日已打卡总数
+              clockIn:
+                type: integer
+                description: 0 ：已打卡  1： 去打卡：可以打卡 2： 去打卡,不可以打卡 3：未打卡
+              headImages:
+                type: array
+                description: 用户头像
+                items:
+                  properties:
+                    imagesUrl:
+                      type: string
+                      description: 用户头像连接
+              assignmentList:
+                 type: array
+                 description: 任务列表
+                 items:
+                    properties:
+                      assignmentId:
+                        type: integer
+                        description: 任务id
+                      assignmentName:
+                        type: string
+                        description: 套卷内容
+                      finish:
+                        type: boolean
+                        description: 是否完成
+                      people:
+                        type: integer
+                        description: 多少人完成
+                      current:
+                        type: string
+                        description: 当前完成数
+                      totle:
+                        type: string
+                        description: 共50题
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  /dailyPractice/calendar:
+    get:
+      tags:
+        - DailyPractice
+      summary: 每日一练日历
+      description: 每日一练日历
+      parameters:
+        - name: year
+          in: query
+          description: 请求的年
+          required: false
+          type: integer
+          format: int64
+        - name: month
+          in: query
+          description: 请求月
+          required: false
+          type: integer
+          format: int 64
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: object
+            description:  打卡详情
+            properties:
+              clockInSum:
+                type: integer
+                description: 总打卡数
+              dateSum:
+                type: integer
+                description: 今年一共多少天
+              dateList:
+                type: array
+                description: 日历详情
+                items:
+                  properties:
+                    number:
+                      type: integer
+                      description: 日期
+                    status:
+                      type: integer
+                      description: 状态 0:已打卡 ，1 完成历史 未打卡 2 初始值
+                    choosed:
+                      type: boolean
+                      description: 是否被选中
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  /dailyPractice/userClockIn:
+    post:
+      tags:
+        - DailyPractice
+      summary: 今日打卡
+      description: 今日打卡
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: object
+            description:  打卡详情
+            properties:
+              clockInSum:
+                type: integer
+                description: 总打卡数
+              examTypeId:
+                type: integer
+                description: 考试类型
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  /dailyPractice/clockInSum:
+    get:
+      tags:
+        - DailyPractice
+      summary: 打卡总数
+      description: 打卡总数
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: object
+            description:  打卡详情
+            properties:
+              clockInSum:
+                type: integer
+                description: 总打卡数
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  /activity:
+    get:
+      tags:
+        - Activity
+      summary: 活动列表
+      description: 活动列表
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            description:  拼团成功
+            items:
+              properties:
+                activityName:
+                  type: string
+                  description: 活动名称
+                activityType:
+                  type: string
+                  description: 活动模板消息类型
+                activityUrl:
+                  type: string
+                  description: 活动路径
+                activityImgUrl:
+                  type: string
+                  description: 活动图片
+                status:
+                  type: string
+                  description: WAITING(“等待活动开始”),
+                               NOW(“活动进行中”)
+                               END(“活动已经结束”);
+                people:
+                  type: integer
+                  description: 参与人数
+                lastDay:
+                  type: integer
+                  description: 倒计时
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  /activity/push:
+    get:
+      tags:
+        - Activity
+      summary: 活动推送消息
+      description: 活动推送消息
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: object
+            description:  团购消息推送内容
+            properties:
+              aName:
+                type: string
+                description:  活动名称
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  /activity/join:
+    post:
+      tags:
+        - Activity
+      summary: 发起拼团
+      description: 发起拼团
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: object
+            description:  用户发起拼团
+            properties:
+              aName:
+                type: string
+                description: 拼团信息
+              status:
+                type: integer
+                description: 发起拼团是否成功0：失败1：成功
+              people:
+                type: integer
+                description: 还剩几人即可成功
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  /activity/details:
+    get:
+      tags:
+        - Activity
+      summary: 拼团详情页
+      description: 拼团详情页
+      parameters:
+        - name: mark
+          in: query
+          description:  用户分享标识
+          required: false
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: object
+            description:  用户发起拼团、参加拼团
+            properties:
+              aName:
+                type: string
+                description: 拼团信息
+              people:
+                type: integer
+                description: 还剩几人即可成功
+              userList:
+                type: array
+                description: 拼团用户详情
+                items:
+                  properties:
+                    name:
+                      type: string
+                      description: 用户名
+                    headImageUrl:
+                      type: string
+                      description: 用户头像
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  /activity/goods:
+    get:
+      tags:
+        - Activity
+      summary: 拼团成功详情页
+      description: 参加拼团/发起拼团
+      parameters:
+        - name: phoneNumber
+          in: query
+          description:  用户的手机号码
+          required: false
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: object
+            description:  拼团成功
+            properties:
+              goodsList:
+                type: array
+                description: 拼团资料
+                items:
+                  properties:
+                    name:
+                      type: string
+                      description: 资料名
+                    url:
+                      type: string
+                      description: 资料url
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  /activity/decodeUserInfo:
+    get:
+      tags:
+        - Activity
+      summary: 微信授权获取手机号
+      description: ''
+      operationId: loginphoneUserAdd
+      consumes:
+        - application/json
+      produces:
+        - '*/*'
+      parameters:
+        - name: code
+          in: query
+          description: code
+          required: true
+          type: integer
+          format: int64
+        - name: encryptedData
+          in: query
+          description: code
+          required: true
+          type: integer
+          format: int64
+        - name: iv
+          in: query
+          description: code
+          required: true
+          type: integer
+          format: int64
+        - name: type
+          in: query
+          description: 拼团：GIFTBAG   抽签：DRAW
+          required: false
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          schema:
+            properties:
+              status:
+                type: integer
+                description: 状态码
+              msg:
+                type: string
+                description: 信息
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  /activity/draw/details:
+    get:
+      tags:
+        - Activity
+      summary: 抽签页面详情
+      description: 抽签页面详情
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: object
+            description:  拼团成功
+            properties:
+              schedule:
+                type: integer
+                description: 解锁文件数量
+              needPeple:
+                type: integer
+                description: 还需多少人才可以解锁
+              phoneAuth:
+                type: boolean
+                description: 是否手机号授权
+              phoneNumberDone:
+                type: boolean
+                description: 是不是电话完成任务，默认不是
+              goodsList:
+                type: array
+                description: 拼团资料
+                items:
+                  properties:
+                    name:
+                      type: string
+                      description: 资料名
+                    url:
+                      type: string
+                      description: 资料url
+              helpList:
+                type: array
+                description: 助力好友
+                items:
+                  properties:
+                    nicName:
+                      type: string
+                      description: 资料名
+                    headImageUrl:
+                      type: string
+                      description: 头像url
+              wxInfo:
+                type: object
+                description: 助力好友
+                properties:
+                  wxName:
+                    type: string
+                    description: 资料名
+                  wxCodeUrl:
+                    type: string
+                    description: 头像url
+              drawInfo:
+                type: object
+                description: 助力好友
+                properties:
+                  drawType:
+                    type: string
+                    description: '抽签类型:ELYNLOVER("上上签"),
+                                  TOPSIGN("上吉签"),
+                                  AUSPICIOUS_SIGN("吉签");'
+                  headerDesc:
+                    type: string
+                    description: 第一段文字
+                  bodyDesc:
+                    type: string
+                    description: 第二段文字
+                  footDesc:
+                    type: string
+                    description: 第三段文字
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  /activity/draw/join:
+    post:
+      tags:
+        - Activity
+      summary: 抽签结果上报
+      description: 抽签结果
+      parameters:
+        - name: DrawType
+          in: query
+          description:  用户抽签类型( ELYNLOVER("上上签"),
+                        TOPSIGN("上吉签")
+                        AUSPICIOUS_SIGN("吉签"))
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: object
+            description:  上报成功
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  /activity/draw/shareUser:
+    get:
+      tags:
+        - Activity
+      summary: 分享用户详情
+      description: 分享用户详情
+      parameters:
+      - name: mark
+        in: query
+        description:  用户分享标识
+        required: true
+        type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: object
+            description:  分享用户详情
+            properties:
+              drawType:
+                type: string
+                description: '抽签类型:ELYNLOVER("上上签"),
+    TOPSIGN("上吉签"),
+    AUSPICIOUS_SIGN("吉签");'
+              helpList:
+                type: array
+                description: 助力好友
+                items:
+                  properties:
+                    nicName:
+                      type: string
+                      description: 资料名
+                    headImageUrl:
+                      type: string
+                      description: 头像url
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  /activity/draw/help:
+    post:
+      tags:
+        - Activity
+      summary: 好友助力
+      description: 好友助力
+      parameters:
+      - name: mark
+        in: query
+        description:  用户分享标识
+        required: true
+        type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: object
+            description:  分享用户详情
+            properties:
+              done:
+                type: integer
+                description: 1:抽过签 0： 没有抽过签
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  /activity/valentines/form:
+    get:
+      tags:
+        - Activity
+      summary: 配对活动表单
+      description: 配对活动表单
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              type: object
+              description: 好友排行
+              properties:
+                isShow:
+                  type: boolean
+                  description: 是否展示
+                successNum:
+                  type: integer
+                  description: 成功多少对
+                successInfos:
+                  type: object
+                  description:  拼团成功
+                  properties:
+                    clockInDay:
+                      type: integer
+                      description: 累计打卡天数
+                    correctRate:
+                      type: integer
+                      description: 正确率
+                    questionNum:
+                      type: string
+                      description: 刷题总数量
+                    rankingNum:
+                      type: integer
+                      description: 排行榜排名
+                    userInfo:
+                      type: object
+                      description: 配对用户组合
+                      properties:
+                        headImageUrl:
+                          type: string
+                          description: 头像url
+                        nickName:
+                          type: string
+                          description: 昵称
+                    otherUserInfo:
+                      type: object
+                      description: 助力好友
+                      properties:
+                        headImageUrl:
+                          type: string
+                          description: 头像url
+                        nickName:
+                          type: string
+                          description: 昵称
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+    post:
+      tags:
+        - Activity
+      summary: 配对活动表单上传
+      description: 配对活动表单上传
+      parameters:
+      - name: selfSex
+        in: query
+        description:  自己性别
+        required: true
+        type: string
+      - name: hopeSex
+        in: query
+        description:  希望对方性别
+        required: true
+        type: string
+      responses:
+        '200':
+          description: OK
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  /activity/valentines/details:
+    get:
+      tags:
+        - Activity
+      summary: 配对成功活动详情
+      description: 配对成功活动详情
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: object
+            description:  拼团成功
+            properties:
+              carryPrize:
+                type: boolean
+                description: 是否获奖
+              rankingNum:
+                type: integer
+                description: 排名
+              userInfo:
+                type: object
+                description: 助力好友
+                properties:
+                  headImageUrl:
+                    type: string
+                    description: 头像url
+                  nickName:
+                    type: string
+                    description: 昵称
+                  examTypeNameParent:
+                    type: string
+                    description: 一级考试类型
+                  examTypeNameSon:
+                    type: string
+                    description: 二级考试类型
+                  answerNum:
+                    type: string
+                    description: 回答题目数量
+                  correctRate:
+                    type: string
+                    description: 正确率
+              otherUserInfo:
+                type: object
+                description: 助力好友
+                properties:
+                  headImageUrl:
+                    type: string
+                    description: 头像url
+                  nickName:
+                    type: string
+                    description: 昵称
+                  examTypeNameParent:
+                    type: string
+                    description: 一级考试类型
+                  examTypeNameSon:
+                    type: string
+                    description: 二级考试类型
+                  answerNum:
+                    type: string
+                    description: 回答题目数量
+                  correctRate:
+                    type: string
+                    description: 正确率
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  /activity/valentines/ranking:
+    get:
+      tags:
+        - Activity
+      summary: 配对活动排行榜
+      description: 配对活动排行榜
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              type: object
+              description: 好友排行
+              properties:
+                isReach:
+                  type: boolean
+                  description: 是否达标
+                isMe:
+                  type: boolean
+                  description: 是否自己
+                clockInDay:
+                  type: integer
+                  description: 累计打卡天数
+                correctRate:
+                  type: string
+                  description: 正确率
+                questionNum:
+                  type: integer
+                  description: 刷题总数量
+                rankingNum:
+                  type: integer
+                  description: 排行榜排名
+                userInfo:
+                  type: object
+                  description: 配对用户组合
+                  properties:
+                    headImageUrl:
+                      type: string
+                      description: 头像url
+                    nickName:
+                      type: string
+                      description: 昵称
+                otherUserInfo:
+                  type: object
+                  description: 助力好友
+                  properties:
+                    headImageUrl:
+                      type: string
+                      description: 头像url
+                    nickName:
+                      type: string
+                      description: 昵称
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+
+  /activity/APM/ranking:
+    get:
+      tags:
+        - Activity
+      summary: 小心心手速排行榜
+      description: 小心心手速排行榜
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: object
+            properties:
+              userInfo:
+                type: array
+                items:
+                  properties:
+                    rankingNum:
+                      type: integer
+                      description: 排行num
+                    currentUser:
+                      type: boolean
+                      description: 是否当前用户
+                    headImgUrl:
+                      type: string
+                      description: 头像url
+                    nickName:
+                      type: string
+                      description: 昵称
+                    title:
+                      type: string
+                      description: 用户称号
+                    questionSum:
+                      type: integer
+                      description: 用户多少道题
+                    apm:
+                      type: integer
+                      description: 用户最高手速
+              meInfo:
+                type: object
+                properties:
+                  rankingNum:
+                    type: integer
+                    description: 排行num
+                  headImgUrl:
+                    type: string
+                    description: 头像url
+                  nickName:
+                    type: string
+                    description: 昵称
+                  title:
+                    type: string
+                    description: 用户称号
+                  questionSum:
+                    type: integer
+                    description: 用户多少道题
+                  apm:
+                    type: integer
+                    description: 用户最高手速
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+
+  /activity/pointQuestion/final:
+    get:
+      tags:
+        - Activity
+      summary: 小心心提交点击次数，返回数据
+      description:  小心心提交点击次数，返回数据
+      parameters:
+        - name: sum
+          in: query
+          description: 点击次数
+          required: false
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: object
+            description:  用户提交手速 为用户匹配称号
+            properties:
+              title:
+                type: string
+                description: 获取称号
+              question:
+                type: integer
+                description: 获取题目数量
+              pointSum:
+                type: integer
+                description: 点击次数
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  /activity/pointQuestion/home:
+    get:
+      tags:
+        - Activity
+      summary: 小心心首页
+      description:  小心心首页
+      parameters:
+        - name: shareMark
+          in: query
+          description: 分享标识
+          required: false
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: object
+            description:  用户提交手速 为用户匹配称号
+            properties:
+              nickName:
+                type: string
+                description: 昵称
+              headImageUrl:
+                type: string
+                description: 头像
+              highestApm:
+                type: integer
+                description: 最高点击次数
+              chance:
+                type: string
+                description:  用户剩余机会数
+              usersHeadImageUrl:
+                type: array
+                description: 排行榜头像集合
+                items:
+                  properties:
+                    headImageUrl:
+                      type: string
+                      description:  排行榜用户头像
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Foun
+  /activity/worldCup/match:
+    get:
+      tags:
+        - Activity
+      summary: 世界杯配对活动随机匹配
+      parameters:
+      - name: selfSex
+        in: query
+        description:  自己性别
+        required: true
+        type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: object
+            description:  随机匹配
+            properties:
+              success:
+                type: boolean
+                description: 是否成功
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  /activity/worldCup/invite:
+    post:
+      tags:
+        - Activity
+      summary: 世界杯配对活动邀请匹配
+      parameters:
+      - name: selfSex
+        in: query
+        description:  自己性别
+        required: true
+        type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: object
+            description:  邀请匹配
+            properties:
+              success:
+                type: boolean
+                description: 是否成功
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+
+  /activity/worldCup/remindTeammates:
+    post:
+      tags:
+        - Activity
+      summary: 提醒队友
+      responses:
+        '200':
+          description: OK
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  /activity/worldCup/kickOut:
+    post:
+      tags:
+        - Activity
+      summary: 踢队友
+      responses:
+        '200':
+          description: OK
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  /activity/worldCup/userDetails:
+    get:
+      tags:
+        - Activity
+      summary: 世界配对成功活动详情
+      description: 配对成功活动详情
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: object
+            description:  配对成功
+            properties:
+              carryPrize:
+                type: boolean
+                description: 是否获奖
+              rankingNum:
+                type: integer
+                description: 排名
+              privity:
+                type: integer
+                description: 默契度
+              countDown:
+                type: integer
+                description: 倒计时
+              change:
+                type: boolean
+                description: 是否可以换队友
+              remind:
+                type: boolean
+                description: 是否可以提醒队友
+              userInfo:
+                type: object
+                description: 个人详情
+                properties:
+                  headImageUrl:
+                    type: string
+                    description: 头像url
+                  nickName:
+                    type: string
+                    description: 昵称
+                  examTypeNameParent:
+                    type: string
+                    description: 一级考试类型
+                  examTypeNameSon:
+                    type: string
+                    description: 二级考试类型
+                  answerNum:
+                    type: string
+                    description: 回答题目数量
+                  correctRate:
+                    type: string
+                    description: 正确率
+              otherUserInfo:
+                type: object
+                description: 队友详情
+                properties:
+                  headImageUrl:
+                    type: string
+                    description: 头像url
+                  nickName:
+                    type: string
+                    description: 昵称
+                  examTypeNameParent:
+                    type: string
+                    description: 一级考试类型
+                  examTypeNameSon:
+                    type: string
+                    description: 二级考试类型
+                  answerNum:
+                    type: string
+                    description: 回答题目数量
+                  correctRate:
+                    type: string
+                    description: 正确率
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  /activity/worldCup/teamDetails:
+    get:
+      tags:
+        - Activity
+      summary: 世界配对成功活动详情
+      description: 配对成功活动详情
+      parameters:
+        - name: teamId
+          in: query
+          description: 组队id 查自己的队伍不用传
+          required: false
+          type: integer
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: object
+            description:  配对成功
+            properties:
+              carryPrize:
+                type: boolean
+                description: 是否获奖
+              rankingNum:
+                type: integer
+                description: 排名
+              privity:
+                type: integer
+                description: 默契度
+              countDown:
+                type: integer
+                description: 倒计时
+              change:
+                type: boolean
+                description: 是否可以换队友
+              remind:
+                type: boolean
+                description: 是否可以提醒队友
+              match:
+                type: boolean
+                description: 是否匹配成功
+              end:
+                type: boolean
+                description: 活动是否结束
+              showCountDown:
+                type: boolean
+                description: 是否显示倒计时
+              userInfo:
+                type: object
+                description: 个人详情
+                properties:
+                  headImageUrl:
+                    type: string
+                    description: 头像url
+                  nickName:
+                    type: string
+                    description: 昵称
+                  examTypeNameParent:
+                    type: string
+                    description: 一级考试类型
+                  examTypeNameSon:
+                    type: string
+                    description: 二级考试类型
+                  answerNum:
+                    type: string
+                    description: 回答题目数量
+                  correctRate:
+                    type: string
+                    description: 正确率
+                  selfSex:
+                    type: string
+                    description: 性别
+              otherUserInfo:
+                type: object
+                description: 队友详情
+                properties:
+                  headImageUrl:
+                    type: string
+                    description: 头像url
+                  nickName:
+                    type: string
+                    description: 昵称
+                  examTypeNameParent:
+                    type: string
+                    description: 一级考试类型
+                  examTypeNameSon:
+                    type: string
+                    description: 二级考试类型
+                  answerNum:
+                    type: string
+                    description: 回答题目数量
+                  correctRate:
+                    type: string
+                    description: 正确率
+                  selfSex:
+                    type: string
+                    description: 性别
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  /activity/worldCup/ranking:
+    get:
+      tags:
+        - Activity
+      summary: 世界杯配对活动排行榜
+      description: 配对活动排行榜
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              type: object
+              description: 好友排行
+              properties:
+                id:
+                  type: integer
+                  description: 队伍Id
+                isMe:
+                  type: boolean
+                  description: 是否自己
+                rankingNum:
+                  type: integer
+                  description: 排行榜排名
+                privity:
+                  type: integer
+                  description: 默契度
+                result:
+                  type: boolean
+                  description: 最终结果，获奖--其他 结束之前不展示
+                users:
+                  type: array
+                  items:
+                    type: object
+                    description: 用户列表
+                    properties:
+                      headImageUrl:
+                        type: string
+                        description: 头像url
+                      nickName:
+                        type: string
+                        description: 昵称
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  /activity/worldCup/cancelMatch:
+    get:
+      tags:
+        - Activity
+      summary: 取消匹配
+      description: 等待匹配时可取消匹配
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: object
+            description:  取消匹配
+            properties:
+              result:
+                type: integer
+                description: 1:取消成功，0,：取消失败，-1：已匹配成功不能取消
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  /activity/worldCup/barrage:
+    get:
+      tags:
+        - Activity
+      summary: 弹幕
+      description: 弹幕
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              type: object
+              description: 头像分组
+              properties:
+                oneHeadImage:
+                  type: string
+                  description: 第一个头像
+                twoHeadImage:
+                  type: string
+                  description: 第二个头像
+                type:
+                  type: integer
+                  description: 类型1：上升名词，2.新加入只有头像1可用
+                up:
+                  type: integer
+                  description: 上升名次
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  /activity/worldCup/share:
+    get:
+      tags:
+        - Activity
+      summary: 世界杯配对活动点击气泡详情
+      description: 世界杯配对活动点击气泡详情
+      parameters:
+        - name: mark
+          in: query
+          description:  用户分享标识
+          required: false
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+                description: 允许加入 ALLOW 不允许加入 NOTALLOW 是自己 OWN
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  /activity/worldCup/join:
+    post:
+      tags:
+        - Activity
+      summary: 加入好友邀请
+      description: 加入好友邀请
+      parameters:
+        - name: mark
+          in: query
+          description:  用户分享标识
+          required: false
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+                description: 加入成功 SUCCESS 加入失败 FAIL
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  /activity/worldCup/peopleSum:
+    get:
+      tags:
+        - Activity
+      summary: 参与人数
+      description: 参与人数
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: object
+            properties:
+              peopleSum:
+                type: integer
+                description: 参与人数
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+
+  /commodity/api/v1/IM/join:
+    post:
+      tags:
+        - IM
+      summary: 聊天室加入（芒果会计小程序）
+      description: 聊天室加入（芒果会计小程序）
+      parameters:
+        - name: imId
+          in: query
+          description: 房间id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: object
+            properties:
+              Identifier:
+                type: string
+                description: IM标识
+              UserSig:
+                type: string
+                description: 用户签名
+              groupId:
+                type: string
+                description: 群标识
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  /commodity/api/v1/IM/quit:
+    post:
+      tags:
+        - IM
+      summary: 聊天室退出（芒果会计小程序）
+      description: 聊天室退出（芒果会计小程序）
+      parameters:
+        - name: imId
+          in: query
+          description: 房间id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  /trans/api/v1/users/token:
+    get:
+      tags:
+        - TRANS
+      summary: 微信公众号获取授权（公众号）
+      description: 微信公众号获取授权（公众号）
+      parameters:
+        - name: code
+          in: query
+          description: 换取openId标识
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            properties:
+              token:
+                type: string
+                description: 服务器验证码
+              refreshToken:
+                type: string
+                description: 刷新token
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  /trans/api/v1/order:
+    get:
+      tags:
+        - TRANS
+      summary: 订单列表（公众号）
+      description: 订单列表（公众号）
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              type: object
+              description: 好友排行
+              properties:
+                commodityId:
+                  type: string
+                  description: 商品id
+                commodityName:
+                  type: string
+                  description: 商品名称
+                commodityImage:
+                  type: string
+                  description: 商品图片
+                streamId:
+                  type: string
+                  description: 商品详情id（根据类型不同不同，例：直播，套卷）
+                commodityType:
+                  type: string
+                  description: LIVE("直播"),
+                               PAPER("套卷");
+                payStatus:
+                  type: boolean
+                  description: 是否支付
+                orderCode:
+                  type: string
+                  description: 订单号
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  /trans/api/v1/order/prePay:
+    post:
+      tags:
+        - TRANS
+      summary: 预生成订单（芒果会计小程序）
+      description: 预生成订单（芒果会计小程序）
+      parameters:
+        - in: body
+          name: orderParams
+          description: 答题对象
+          schema:
+            type: array
+            description: 作答信息
+            items:
+              properties:
+                commodityId:
+                  type: integer
+                  description: 商品id
+                commodityNum:
+                  type: integer
+                  description: 商品数量
+      responses:
+        '200':
+          description: OK
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  /trans/api/v1/order/pay:
+    post:
+      tags:
+        - TRANS
+      summary: 立即支付（公众号）
+      description: 立即支付（公众号）
+      parameters:
+        - name: orderCode
+          in: query
+          description: 订单id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            properties:
+              appId:
+                type: string
+                description: appId
+              signType:
+                type: string
+                description: 交易类型
+              package:
+                type: string
+                description: 预支付会话标识
+              nonceStr:
+                type: string
+                description: 随机字符串
+              timeStamp:
+                type: string
+                description: 时间戳
+              paySign:
+                type: string
+                description: 验证签名
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+definitions:
+  ExamType:
+    type: object
+    description: 考试类型
+    properties:
+      id:
+        type: integer
+        format: int64
+      primaryCategories:
+        type: string
+      parentId:
+        type: string
+      description:
+        type: string
+  ExamTypeItem:
+    type: object
+    description: 考试类型集合
+    properties:
+      id:
+        type: integer
+        format: int64
+      primaryCategories:
+        type: string
+      parentId:
+        type: string
+      description:
+        type: string
+      item:
+        type: array
+        items:
+          $ref: '#/definitions/ExamType'
+        description: 子节点
+  Subject:
+    type: object
+    description: 科目
+    properties:
+      id:
+        type: integer
+        format: int64
+        description: id
+      examTypeId:
+        type: integer
+        format: int64
+        description: 考试类型id
+      subjectName:
+        type: string
+        description: 科目名称
+      number:
+        type: integer
+        format: int64
+        description: 考试类型中的考试顺序号
+  SubjectItem:
+    type: object
+    description: 科目集合
+    properties:
+      subjectId:
+        type: integer
+        format: int64
+        description: id
+      examTypeId:
+        type: integer
+        format: int64
+        description: 考试类型id
+      subjectName:
+        type: string
+        description: 科目名称
+      number:
+        type: integer
+        format: int64
+        description: 考试类型中的考试顺序号
+  UserDemo:
+    type: object
+    description: 我的详情
+    properties:
+      headImageUrl:
+        type: string
+        description: 用户头像
+      nickName:
+        type: string
+        description: 昵称
+      examType:
+        type: string
+        description: 考试类型
+      examTypeId:
+        type: string
+        description: 考试类型
+      levelNum:
+        type: integer
+        description: 当前用户级别
+      userIntegral:
+        type: integer
+        description: 当前用户积分数
+      maxIntegral:
+        type: integer
+        description: 当前等级所需最大积分
+      currentSubject:
+        type: string
+        description: 当前所选科目
+      weekAnswerSum:
+        type: integer
+        description: 本周答题
+      weekAnswerCorrect:
+        type: integer
+        description: 本周答对
+      weekAnswerCorrectRate:
+        type: integer
+        description: 本周正确率
+      percent:
+        type: integer
+        description: 本周正确率
+      passRate:
+        type: integer
+        description: 通过率
+      ranking:
+        type: integer
+        description: 超越多少用户
+      examTimeInfo:
+        type: object
+        description: 考试类型时间
+        $ref: '#/definitions/ExamTimeInfoDemo'
+  ExamTimeInfoDemo:
+    type: object
+    description: 考试时间信息
+    properties:
+      examDate:
+        type: string
+        description: 考试时间
+      intervalDays:
+        type: integer
+        description: 间隔时间
+      examType:
+        type: string
+        description: 考试时间类型，
+                     WAITING("等待考试开始"),
+                     NOW("考试进行中");
+  ActivitysInfoDemo:
+    type: object
+    description: 考试时间信息
+    properties:
+      activityType:
+        type: string
+        description: 考试时间
+      activityStatus:
+        type: integer
+        description: 0,下架 1，上架
+  ChapterDemo:
+    type: object
+    description: 章节
+    properties:
+      chapterId:
+        type: integer
+        description: 章节id（章节练习/只做错题/我的收藏/我的错题）
+      chapterName:
+        type: string
+        description: 章节名称（章节练习/只做错题/我的收藏/我的错题）
+      people:
+        type: integer
+        description: 做过的人数（章节练习）
+      current:
+        type: integer
+        description: 当前完成数（章节练习）
+      totle:
+        type: integer
+        description: 共50题（章节练习）
+      errorNum:
+        type: integer
+        description: 错误题数（只做错题/我的错题）
+      collectNum:
+        type: integer
+        description: 收藏数（我的收藏）
+  ExamQuestionDemo:
+    type: object
+    description: 章节题目
+    properties:
+      questionId:
+        type: integer
+        description: 题目id
+      questionDesc:
+        type: string
+        description: 题目内容
+      questionType:
+        type: string
+        description: SINGLE_ANSWER("单选题"),
+                     MULTIPLE_ANSWER("多选题"),
+                     JUDGE_ANSWER("判断提"),
+                     SHORT_ANSWER("简答题");
+      number:
+        type: integer
+        description: 题目顺序
+      collect:
+        type: boolean
+        description: 是否收藏
+      options:
+        type: array
+        items:
+          $ref: '#/definitions/ExamQuestionAnswerDemo'
+      answer:
+        type: object
+        $ref: '#/definitions/AnswerDemo'
+  ExamQuestionAnswerDemo:
+    type: object
+    description: 题目答案
+    properties:
+      option:
+        type: string
+        description: 选项
+      optionDesc:
+        type: integer
+        description: 选项内容
+      selected:
+        type: boolean
+        description: 是否勾选
+      stutus:
+        type: string
+        description: 'NOTHING("无"),
+CORRECT("选对"),
+HALF_CORRECT("半对"),
+ERROR("选错");'
+  ExamPaperDemo:
+    type: object
+    description: 套卷模拟
+    properties:
+      examPapersId:
+        type: integer
+        description: 套卷id
+      examPaperName:
+        type: string
+        description: 套卷内容
+      finish:
+        type: boolean
+        description: 是否完成
+      people:
+        type: integer
+        description: 多少人完成
+      current:
+        type: string
+        description: 当前完成数
+      totle:
+        type: string
+        description: 共50题
+  DailyPracticeExamPaperDemo:
+    type: object
+    description: 每日一练首页数据
+    properties:
+      schedult:
+        type: string
+        description: 今日进度
+      donesum:
+        type: integer
+        description: 今日已打卡
+      clockIn:
+        type: integer
+        description: 1:(可以打开),0:(不可以：已打卡，或者是还未达到打卡条件)
+      headImages:
+        type: array
+        description: 用户头像
+        items:
+          properties:
+            imagesUrl:
+              type: string
+              description: 用户头像连接
+      assignmentList:
+        type: array
+        description: 任务列表
+        items:
+          properties:
+            examPapersId:
+              type: integer
+              description: 套卷id
+            examPaperName:
+              type: string
+              description: 套卷内容
+            finish:
+              type: boolean
+              description: 是否完成
+            people:
+              type: integer
+              description: 多少人完成
+            current:
+              type: string
+              description: 当前完成数
+            totle:
+              type: string
+              description: 共50题
+            schedule:
+              type: string
+              description: 当前任务进度 （1/3）
+
+  HomeExamPaperDemo:
+    type: object
+    description: 套卷模拟
+    properties:
+      examPapersId:
+        type: integer
+        description: 套卷id
+      examPaperName:
+        type: string
+        description: 套卷内容
+      current:
+        type: string
+        description: 当前完成数
+      totle:
+        type: string
+        description: 共多少道题
+      people:
+        type: integer
+        description: 多少人完成
+      status:
+        type: string
+        description: 最近
+  ExamPaperHistoryDemo:
+    type: object
+    description: 套卷模拟
+    properties:
+      userAnswerId:
+        type: integer
+        description: 套卷id
+      examPaperName:
+        type: string
+        description: 套卷内容
+      score:
+        type: string
+        description: 套卷分数
+      finishTime:
+        type: integer
+        description: 套卷用时
+      date:
+        type: integer
+        description: 套卷完成日期
+      unfinishedNum:
+        type: integer
+        description: 套卷未完成题目数量
+  ExamPaperHistoryDemoTwo:
+    type: object
+    description: 套卷模拟
+    properties:
+      examPapersId:
+        type: integer
+        description: 套卷id
+      userAnswerId :
+        type: integer
+        description: 用户答题历史id
+      examPaperName:
+        type: string
+        description: 套卷内容
+      score:
+        type: string
+        description: 套卷分数
+      finishTime:
+        type: integer
+        description: 套卷用时
+      date:
+        type: integer
+        description: 套卷完成日期
+      unfinishedNum:
+        type: integer
+        description: 套卷未完成题目数量
+  ExamPaperCorrectDemo:
+    type: object
+    description: 套卷模拟
+    properties:
+      id:
+        type: integer
+        description: 题目id
+      correct:
+        type: boolean
+        description: 是否正确
+  AnswerDemo:
+    type: object
+    description: 套卷模拟
+    properties:
+      correctAnswer:
+        type: string
+        description: 正确答案
+      correctAnswerDesc:
+        type: integer
+        description: 正确答案描述
+      errorNum:
+        type: integer
+        description: 回答错误次数
+      errorPeople:
+        type: integer
+        description: 回答错误人数
+      newestCorrect:
+        type: boolean
+        description: 最近一次答题是否正确 0不正确， 1正确/未作答
+      errorRate:
+        type: integer
+        description: 错误率
+      errorFatherRate:
+        type: integer
+        description: 坑爹率
+  PushDemo:
+    type: object
+    description: 套卷模拟
+    properties:
+      headImageUrl:
+        type: string
+        description: 头像
+      nickName:
+        type: string
+        description: 昵称
+      examPaperName:
+        type: integer
+        description: 试卷名称
+  InfoDemo:
+    type: object
+    description: 用户数据信息
+    properties:
+      answerSum:
+        type: integer
+        description: 历史刷题数
+      userAccuracy:
+        type: integer
+        description: 用户正确率
+      diligent:
+        type: integer
+        description: 勤学苦练
+      userScoreRatio:
+        type: integer
+        description: 考神附体
+      answerDurationRatio:
+        type: integer
+        description: 笔走龙蛇
+      accuracy:
+        type: integer
+        description: 百发百中
+      answerRation:
+        type: integer
+        description: 阅题无数
+      examTypeId:
+        type: integer
+        description: 用户当前的科目Id
+      headImageUrl:
+        type: string
+        description: 用户头像
+      nickName:
+        type: string
+        description: 昵称
+  SupportDemo:
+    type: object
+    description: 数据支持
+    properties:
+      Unchain:
+        type: boolean
+        description: 试卷解锁状态
+      errorSum:
+        type: integer
+        description: 总错题数
+      reciteShow:
+        type: boolean
+        description: 显示背题弹窗
+      worldCupStatus:
+        type: string
+        description: 参加世界杯状态 NotJoin(-1,"没有参加"),  Default(0, "默认"),  Random(1, "等待随机匹配"),  Friends(2, "等待队友匹配"),
+          Abandon(3, "被抛弃了"),
+           Success(10, "匹配成功")
+      activityInfo:
+        type: object
+        description: 活动信息
+        properties:
+          status:
+            type: string
+            description: 'FORM("表单"),
+                          WAIT_PREHEAT("等待配对，显示倒计时")，
+                          WAIT("等待配对，没有倒计时")，
+                          REMINDER("弹出框，配对成功")，
+                          DETAILS("详情页");,
+                          END_DETAILS("匹配成功,已经结束"),
+                          END("未参加或未匹配，已经结束");'
+          remainingTime:
+            type: integer
+            description: PREHEAT("520活动预热") 距离活动开始剩余时间
+          linkUrl:
+            type: string
+            description: 图片地址
+          icon:
+            type: string
+            description: icon 地址
+externalDocs:
+  description: Find out more about Swagger
+  url: 'http://swagger.io'
