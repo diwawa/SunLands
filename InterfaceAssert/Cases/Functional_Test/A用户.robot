@@ -72,8 +72,7 @@ me_info_无参数
 me_info_mark
     [Documentation]   B通过A的mark标识，查看A的详情
     get/users/share    ${token}    DATA    ${EMPTY}
-    ${sql_alterinfo}    userAlterableInfo     ${userId}
-    ${sql_share}    examShare      ${userId}    ${sql_alterinfo['exam_type_id']}
+    ${sql_share}    examShare      ${userId}
     ${resp}     GET/users/me/info    ${token2}    ${sql_share['share_mark']}
     ${sql_pkdetails}    PKQUESTIONCOUNT      ${userId}
     ${sql_answerdetails}    ANSWERQUESTIONCOUNT   ${userId}
@@ -88,6 +87,7 @@ me_info_mark
     should be equal as integers    ${resp['answerDurationRatio']}    ${sql_cartogram['duration_ratio']}
     should be equal as integers    ${resp['accuracy']}    ${sql_cartogram['accuracy']}
     should be equal as integers    ${resp['answerRation']}    ${sql_cartogram['answer_ration']}
+    ${sql_alterinfo}    userAlterableInfo     ${userId}
     should be equal as integers    ${resp['examTypeId']}    ${sql_alterinfo['exam_type_id']}
     ${sql_info}    userInfo      ${userId}
     Should Be Equal As Strings    ${resp['nickName']}    ${sql_info['nick_name']}

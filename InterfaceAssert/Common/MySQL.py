@@ -92,6 +92,17 @@ class MySQL(object):
 		cursor.close()
 		return result
 
+	def editData(self, sql):
+		u'''
+		使用INSERT、DELETE、UPDATE进行增删改
+		:param sql:
+		:return:
+		'''
+		cursor = self.conn.cursor()
+		cursor.execute(sql)
+		self.conn.commit()
+		cursor.close()
+
 	def __del__(self):
 		self.conn.close()
 

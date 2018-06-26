@@ -1,7 +1,7 @@
 # coding=utf-8
 from MySQL import *
 from Function import *
-import json
+from PrivateMethod import *
 
 
 class GetSQL(object):
@@ -18,10 +18,10 @@ class GetSQL(object):
 		sql["child_id"] = []
 		sql["child_name"] = []
 		for id in sql["parent_id"]:
-			query_child = "SELECT id,primary_categories FROM `exam_type` WHERE parent_id="+str(id)+" AND del_flag=0"
+			query_child = "SELECT id,primary_categories FROM `exam_type` WHERE parent_id=" + str(id) + " AND del_flag=0"
 			print query_child
 			child = mysql.getAllRow(query_child)
-			if child=='':
+			if child == '':
 				sql["child_id"].append([])
 				sql["child_name"].append([])
 			else:
@@ -30,12 +30,13 @@ class GetSQL(object):
 		return sql
 
 	def subject(self, exam_type_id):
-		print "exam_type_id=",exam_type_id
+		print "exam_type_id=", exam_type_id
 		mysql = MySQL()
 		sql = {}
 		fields = "id,subject_name,number"
 		listfields = fields.split(",")
-		query = "SELECT " + fields + " FROM `subject` WHERE del_flag=0 AND exam_type_id=" + str(exam_type_id) + " ORDER BY number"
+		query = "SELECT " + fields + " FROM `subject` WHERE del_flag=0 AND exam_type_id=" + str(
+			exam_type_id) + " ORDER BY number"
 		print query
 		result = mysql.getAllRow(query)
 		for i in range(len(result)):
@@ -85,13 +86,13 @@ class GetSQL(object):
 		exam_type_id = sql["exam_type_id"]
 		fields_time = "begain_date,end_date,`year`"
 		listfields_time = fields_time.split(",")
-		query_time = "SELECT " + fields_time + " FROM exam_time WHERE id =( SELECT MAX(exam_time_id) FROM `relation_exam_time_type` WHERE exam_type_id =" + str(exam_type_id) + ")"
+		query_time = "SELECT " + fields_time + " FROM exam_time WHERE id =( SELECT MAX(exam_time_id) FROM `relation_exam_time_type` WHERE exam_type_id =" + str(
+			exam_type_id) + ")"
 		result_time = mysql.getFistRow(query_time)
 		for i in range(len(result_time)):
 			sql[listfields_time[i]] = result_time[i]
 
-		sql['examTimeInfo'] = self.examTimeInfo(sql['begain_date'],sql['end_date'])
-
+		sql['examTimeInfo'] = self.examTimeInfo(sql['begain_date'], sql['end_date'])
 
 		level_id = sql["level_id"]
 		fields_level = "level_num,min_integral,max_integral,level_name"
@@ -132,14 +133,15 @@ class GetSQL(object):
 			sql[listfields[i]] = result[i]
 		return sql
 
-	def examShare(self, user_id,exam_type_id):
+	def examShare(self, user_id):
 		print "user_id=", user_id
-		print "exam_type_id=", exam_type_id
 		mysql = MySQL()
 		sql = {}
 		fields = "share_mark"
 		listfields = fields.split(",")
-		query = "SELECT " + fields + " FROM `exam_share` WHERE del_flag=0 AND user_id=" + str(user_id) + " AND exam_type_id=" + str(exam_type_id) + " ORDER BY id DESC"
+		query = "SELECT " + fields + " FROM `exam_share` WHERE del_flag=0 AND user_id=" + str(
+			user_id) + " AND exam_type_id=(SELECT exam_type_id FROM relation_user_exam_type WHERE del_flag=0 AND current=1 AND user_id=" + str(
+			user_id) + ") ORDER BY id DESC"
 		result = mysql.getFistRow(query)
 		for i in range(len(result)):
 			sql[listfields[i]] = result[i]
@@ -160,9 +162,11 @@ class GetSQL(object):
 		if exam_type_id == 0:
 			pass
 		else:
-			query_count_week = "SELECT * FROM pk_log_details WHERE del_flag = 0 AND YEARWEEK(DATE_FORMAT(modifi_date,'%Y-%m-%d')) = YEARWEEK(NOW()) AND pk_log_id IN (SELECT id FROM `pk_log` WHERE exam_type_id=" + str(exam_type_id) + ") AND user_id =" + str(
+			query_count_week = "SELECT * FROM pk_log_details WHERE del_flag = 0 AND YEARWEEK(DATE_FORMAT(modifi_date,'%Y-%m-%d')) = YEARWEEK(NOW()) AND pk_log_id IN (SELECT id FROM `pk_log` WHERE exam_type_id=" + str(
+				exam_type_id) + ") AND user_id =" + str(
 				user_id)
-			query_correct_week = "SELECT * FROM pk_log_details WHERE del_flag = 0 AND YEARWEEK(DATE_FORMAT(modifi_date,'%Y-%m-%d')) = YEARWEEK(NOW()) AND correct_answer = user_answer AND pk_log_id IN (SELECT id FROM `pk_log` WHERE exam_type_id=" + str(exam_type_id) + ") AND user_id =" + str(
+			query_correct_week = "SELECT * FROM pk_log_details WHERE del_flag = 0 AND YEARWEEK(DATE_FORMAT(modifi_date,'%Y-%m-%d')) = YEARWEEK(NOW()) AND correct_answer = user_answer AND pk_log_id IN (SELECT id FROM `pk_log` WHERE exam_type_id=" + str(
+				exam_type_id) + ") AND user_id =" + str(
 				user_id)
 			result_count_week = mysql.getRowCount(query_count_week)
 			result_correct_week = mysql.getRowCount(query_correct_week)
@@ -175,8 +179,10 @@ class GetSQL(object):
 		print "exam_type_id=", exam_type_id
 		mysql = MySQL()
 		sql = {}
-		query_count = "SELECT * FROM user_answer_details WHERE del_flag=0 AND user_answer_id IN (SELECT id FROM `user_answer` WHERE user_id=" + str(user_id) +")"
-		query_correct = "SELECT * FROM user_answer_details WHERE del_flag=0 AND answer_correct>0 AND user_answer_id IN (SELECT id FROM `user_answer` WHERE user_id=" + str(user_id) +")"
+		query_count = "SELECT * FROM user_answer_details WHERE del_flag=0 AND user_answer_id IN (SELECT id FROM `user_answer` WHERE user_id=" + str(
+			user_id) + ")"
+		query_correct = "SELECT * FROM user_answer_details WHERE del_flag=0 AND answer_correct>0 AND user_answer_id IN (SELECT id FROM `user_answer` WHERE user_id=" + str(
+			user_id) + ")"
 		result_count = mysql.getRowCount(query_count)
 		result_correct = mysql.getRowCount(query_correct)
 		sql['count'] = result_count
@@ -184,15 +190,17 @@ class GetSQL(object):
 		if exam_type_id == 0:
 			pass
 		else:
-			query_count_week = "SELECT * FROM user_answer_details WHERE del_flag = 0 AND YEARWEEK(DATE_FORMAT(modifi_date,'%Y-%m-%d')) = YEARWEEK(NOW()) AND user_answer_id IN (SELECT id FROM `user_answer` WHERE user_id=" + str(user_id) +" AND exam_type_id=" +str(exam_type_id) + ")"
-			query_correct_week = "SELECT * FROM user_answer_details WHERE del_flag = 0 AND YEARWEEK(DATE_FORMAT(modifi_date,'%Y-%m-%d')) = YEARWEEK(NOW()) AND answer_correct>0 AND user_answer_id IN (SELECT id FROM `user_answer` WHERE user_id=" + str(user_id) +" AND exam_type_id=" +str(exam_type_id) + ")"
+			query_count_week = "SELECT * FROM user_answer_details WHERE del_flag = 0 AND YEARWEEK(DATE_FORMAT(modifi_date,'%Y-%m-%d')) = YEARWEEK(NOW()) AND user_answer_id IN (SELECT id FROM `user_answer` WHERE user_id=" + str(
+				user_id) + " AND exam_type_id=" + str(exam_type_id) + ")"
+			query_correct_week = "SELECT * FROM user_answer_details WHERE del_flag = 0 AND YEARWEEK(DATE_FORMAT(modifi_date,'%Y-%m-%d')) = YEARWEEK(NOW()) AND answer_correct>0 AND user_answer_id IN (SELECT id FROM `user_answer` WHERE user_id=" + str(
+				user_id) + " AND exam_type_id=" + str(exam_type_id) + ")"
 			result_count_week = mysql.getRowCount(query_count_week)
 			result_correct_week = mysql.getRowCount(query_correct_week)
 			sql['count_week'] = result_count_week
 			sql['correct_week'] = result_correct_week
 		return sql
 
-	def pkLog(self,pk_log_id):
+	def pkLog(self, pk_log_id):
 		print "pk_log_id=", pk_log_id
 		mysql = MySQL()
 		sql = {}
@@ -202,12 +210,12 @@ class GetSQL(object):
 		result = mysql.getFistRow(query)
 		for i in range(len(result)):
 			sql[listfields[i]] = result[i]
-		if isinstance(sql['head_img_urls'],unicode):
+		if isinstance(sql['head_img_urls'], unicode):
 			head_img_urls = sql['head_img_urls'].split(",")
 			sql['head_img_urls'] = head_img_urls
 		else:
 			sql['head_img_urls'] = []
-		if isinstance(sql['surpass'],int):
+		if isinstance(sql['surpass'], int):
 			pass
 		else:
 			sql['surpass'] = 0
@@ -229,7 +237,7 @@ class GetSQL(object):
 		sql['questions'] = questions
 		return sql
 
-	def pkLogDetails(self, user_id,pk_log_id,question_id):
+	def pkLogDetails(self, user_id, pk_log_id, question_id):
 		print "user_id=", user_id
 		print "pk_log_id=", pk_log_id
 		print "question_id=", question_id
@@ -237,7 +245,8 @@ class GetSQL(object):
 		sql = {}
 		fields = "user_answer,duration,score_add"
 		listfields = fields.split(",")
-		query = "SELECT " + fields + " FROM `pk_log_details` WHERE user_id="+str(user_id)+" AND pk_log_id="+str(pk_log_id)+" AND question_id=" + str(question_id)
+		query = "SELECT " + fields + " FROM `pk_log_details` WHERE user_id=" + str(user_id) + " AND pk_log_id=" + str(
+			pk_log_id) + " AND question_id=" + str(question_id)
 		result = mysql.getFistRow(query)
 		for i in range(len(result)):
 			sql[listfields[i]] = result[i]
@@ -257,7 +266,7 @@ class GetSQL(object):
 		options_desc = sql['options_desc']
 		if "\'" in options_desc:
 			print 111
-			options_desc = options_desc.replace("\'","\"")
+			options_desc = options_desc.replace("\'", "\"")
 		else:
 			pass
 		sql['options_desc'] = options_desc
@@ -287,9 +296,9 @@ class GetSQL(object):
 			errorRate = Function().getPercent(error_num, done_sum, 1)
 			sql['errorRate'] = errorRate
 
-		if DonePeopleCount==0:
+		if DonePeopleCount == 0:
 			int_errorFatherRate = 0
-			float_errorFatherRate=0
+			float_errorFatherRate = 0
 		else:
 			int_errorFatherRate = error2TimesPeopleCount * 5 / DonePeopleCount
 			float_errorFatherRate = float(error2TimesPeopleCount) * 5 / float(DonePeopleCount)
@@ -301,7 +310,7 @@ class GetSQL(object):
 
 		return sql
 
-	def examTimeInfo(self,begin,end):
+	def examTimeInfo(self, begin, end):
 		now = datetime.datetime.now()
 		now = datetime.datetime(now.year, now.month, now.day)
 		begin = datetime.datetime(begin.year, begin.month, begin.day)
@@ -330,13 +339,14 @@ class GetSQL(object):
 			data['examType'] = "NOW"
 		return data
 
-	def dailyPractice(self,user_id):
+	def dailyPractice(self, user_id):
 		print "user_id=", user_id
 		mysql = MySQL()
 		sql = {}
 		fields = "exam_type_id,subject_id"
 		listfields = fields.split(",")
-		query = "SELECT " + fields +" FROM relation_user_exam_type WHERE del_flag=0 AND current=1 AND user_id=" + str(user_id)
+		query = "SELECT " + fields + " FROM relation_user_exam_type WHERE del_flag=0 AND current=1 AND user_id=" + str(
+			user_id)
 		result = mysql.getFistRow(query)
 		for i in range(len(result)):
 			sql[listfields[i]] = result[i]
@@ -348,7 +358,8 @@ class GetSQL(object):
 		subject_id = sql['subject_id']
 		fields_clock = "clock_in_details,clock_in_sum,continue_sum"
 		listfields_clock = fields_clock.split(",")
-		query_clock = "SELECT " + fields_clock + " FROM `user_clock_in` WHERE EXTRACT(MONTH FROM create_date)=EXTRACT(MONTH FROM NOW()) AND user_id=" + str(user_id) + " AND subject_id=" + str(subject_id)
+		query_clock = "SELECT " + fields_clock + " FROM `user_clock_in` WHERE EXTRACT(MONTH FROM create_date)=EXTRACT(MONTH FROM NOW()) AND user_id=" + str(
+			user_id) + " AND subject_id=" + str(subject_id)
 		result_clock = mysql.getFistRow(query_clock)
 		for i in range(len(result_clock)):
 			sql[listfields_clock[i]] = result_clock[i]
@@ -365,7 +376,7 @@ class GetSQL(object):
 
 		return sql
 
-	def dailyPracticeAssignment(self,user_id,assignment_id):
+	def dailyPracticeAssignment(self, user_id, assignment_id):
 		print "user_id=", user_id
 		print "assignment_id=", assignment_id
 		mysql = MySQL()
@@ -384,7 +395,8 @@ class GetSQL(object):
 
 		fields_user = "answer_question_sum,is_done"
 		listfields_user = fields_user.split(",")
-		query_user = "SELECT " + fields_user + " FROM `daily_practice_user_details` WHERE user_id=" + str(user_id) + " AND daily_practice_assignment_id=" + str(assignment_id)
+		query_user = "SELECT " + fields_user + " FROM `daily_practice_user_details` WHERE user_id=" + str(
+			user_id) + " AND daily_practice_assignment_id=" + str(assignment_id)
 		result_user = mysql.getFistRow(query_user)
 		for i in range(len(result_user)):
 			sql[listfields_user[i]] = result_user[i]
@@ -392,8 +404,7 @@ class GetSQL(object):
 		sql['is_done'] = is_done
 		return sql
 
-
-	def chapter(self,user_id):
+	def chapter(self, user_id):
 		print "user_id=", user_id
 		mysql = MySQL()
 		sql = {}
@@ -407,7 +418,8 @@ class GetSQL(object):
 
 		fields_chapter = "id,chapter_number,chapter_name,done_sum,question_sum"
 		listfields_chapter = fields_chapter.split(",")
-		query_chapter = "SELECT " + fields_chapter + " FROM `chapter` WHERE del_flag=0 AND subject_id=" + str(sql['subject_id'])
+		query_chapter = "SELECT " + fields_chapter + " FROM `chapter` WHERE del_flag=0 AND subject_id=" + str(
+			sql['subject_id'])
 		result_chapter = mysql.getAllRow(query_chapter)
 		for i in range(len(result_chapter)):
 			sql[listfields_chapter[i]] = result_chapter[i]
@@ -417,10 +429,11 @@ class GetSQL(object):
 		for key in listfields_chapter_plan:
 			sql[key] = []
 		for chapter_id in sql['id']:
-			query_chapter_plan = "SELECT " + fields_chapter_plan + " FROM `chapter_practice_plan` WHERE user_id="+str(user_id)+" AND chapter_id=" + str(chapter_id)
+			query_chapter_plan = "SELECT " + fields_chapter_plan + " FROM `chapter_practice_plan` WHERE user_id=" + str(
+				user_id) + " AND chapter_id=" + str(chapter_id)
 			result_chapter_plan = mysql.getFistRow(query_chapter_plan)
 			for i in range(len(result_chapter_plan)):
-				if i==0:
+				if i == 0:
 					question_ids = result_chapter_plan[0].split(",")
 					n1 = len(question_ids)
 					n2 = n1 / 10
@@ -428,17 +441,18 @@ class GetSQL(object):
 					for n in range(n2):
 						ids = []
 						for j in range(10):
-							k = 10*n+j
+							k = 10 * n + j
 							ids.append(question_ids[k])
 						str_convert = ','.join(ids)
-						result_ids = mysql.getAllRow("SELECT id FROM `exam_question`WHERE id in (" + str_convert + ") ORDER BY question_number")
+						result_ids = mysql.getAllRow(
+							"SELECT id FROM `exam_question`WHERE id in (" + str_convert + ") ORDER BY question_number")
 						temp += result_ids[0]
 
-					if n1%10>0:
-						n3 = n1%10
+					if n1 % 10 > 0:
+						n3 = n1 % 10
 						ids = []
 						for n in range(n3):
-							k = n2*10+n
+							k = n2 * 10 + n
 							ids.append(question_ids[k])
 						str_convert = ','.join(ids)
 						result_ids = mysql.getAllRow(
@@ -449,7 +463,8 @@ class GetSQL(object):
 
 		fields_collection = "exam_question_id,modifi_date"
 		listfields_collection = fields_collection.split(",")
-		query_collection = "SELECT " + fields_collection + " FROM `collection_question` WHERE del_flag=0 AND user_id=" + str(user_id) + " ORDER BY modifi_date desc"
+		query_collection = "SELECT " + fields_collection + " FROM `collection_question` WHERE del_flag=0 AND user_id=" + str(
+			user_id) + " ORDER BY modifi_date desc"
 		result_collection = mysql.getAllRow(query_collection)
 		for i in range(len(result_collection)):
 			sql[listfields_collection[i]] = result_collection[i]
@@ -461,7 +476,7 @@ class GetSQL(object):
 			sum = 0
 			exam_question_id_1 = []
 			modifi_date_1 = []
-			for i in range(len(sql['exam_question_id'])) :
+			for i in range(len(sql['exam_question_id'])):
 				question_id = sql['exam_question_id'][i]
 				if question_id in question_ids:
 					sum += 1
@@ -477,23 +492,23 @@ class GetSQL(object):
 
 		return sql
 
-	def lastUserQuestion(self,user_id,chapter_id,question_id=0):
+	def lastUserQuestion(self, user_id, chapter_id, question_id=0):
 		print "user_id=", user_id
 		print "chapter_id=", chapter_id
 		print "question_id=", question_id
 		mysql = MySQL()
 		sql = {}
-		if question_id==0:
+		if question_id == 0:
 			fields = "question_id"
 			query_only = "SELECT " + fields + " FROM `last_user_question` AS l,`exam_question` AS q  WHERE q.id=l.question_id AND l.answer_correct=0 AND l.user_id=" + str(
-				user_id) + " AND l.chapter_id=" + str(chapter_id) +" ORDER BY l.error_num DESC,q.question_number"
+				user_id) + " AND l.chapter_id=" + str(chapter_id) + " ORDER BY l.error_num DESC,q.question_number"
 
 			query_my = "SELECT " + fields + " FROM `last_user_question` WHERE answer_correct=0 AND user_id=" + str(
 				user_id) + " AND chapter_id=" + str(chapter_id) + " ORDER BY error_num DESC"
 			result_only = mysql.getAllRow(query_only)
 			result_my = mysql.getAllRow(query_my)
 			count = mysql.getRowCount(query_only)
-			if result_my=="":
+			if result_my == "":
 				pass
 			else:
 				sql['question_id_only'] = result_only[0]
@@ -503,7 +518,7 @@ class GetSQL(object):
 			fields = "answer_correct,answer_desc,error_num,done_sum"
 			listfields = fields.split(",")
 			query = "SELECT " + fields + " FROM `last_user_question` WHERE user_id=" + str(
-				user_id) + " AND chapter_id=" + str(chapter_id) + " AND question_id="+ str(question_id)
+				user_id) + " AND chapter_id=" + str(chapter_id) + " AND question_id=" + str(question_id)
 			result = mysql.getFistRow(query)
 			for i in range(len(result)):
 				if i == 0:
@@ -512,7 +527,7 @@ class GetSQL(object):
 					sql[listfields[i]] = result[i]
 		return sql
 
-	def examPapers(self,user_id):
+	def examPapers(self, user_id):
 		print "user_id=", user_id
 		mysql = MySQL()
 		sql = {}
@@ -526,19 +541,27 @@ class GetSQL(object):
 
 		fields_paper = "id,done_sum,exam_paper_name,type,year,question_sum,score_sum"
 		listfields_paper = fields_paper.split(",")
-		query_paper = "SELECT " + fields_paper + " FROM `exam_paper` WHERE del_flag=0 AND subject_id=" + str(sql['subject_id']) + " ORDER BY `year` DESC"
+		query_paper = "SELECT " + fields_paper + " FROM `exam_paper` WHERE del_flag=0 AND subject_id=" + str(
+			sql['subject_id']) + " ORDER BY `year` DESC"
 		result_paper = mysql.getAllRow(query_paper)
-		for i in range(len(result_paper)):
-			sql[listfields_paper[i]] = result_paper[i]
+		if result_paper == "":
+			for i in range(len(listfields_paper)):
+				sql[listfields_paper[i]] = []
+		else:
+			for i in range(len(result_paper)):
+				sql[listfields_paper[i]] = result_paper[i]
 
 		isDone = []
 		questonIds = []
+		print sql
 		for exam_paper_id in sql['id']:
-			query_id = "SELECT * FROM `relation_user_exam_paper` WHERE exam_paper_id=" + str(exam_paper_id) +" AND user_id=" + str(user_id)
+			query_id = "SELECT * FROM `relation_user_exam_paper` WHERE exam_paper_id=" + str(
+				exam_paper_id) + " AND user_id=" + str(user_id)
 			result_id = mysql.getRowCount(query_id)
 			isDone.append(result_id)
 
-			query_ques = "SELECT id,question_desc FROM exam_question WHERE del_flag=0 AND id in (SELECT exam_question_id FROM `relation_exam_paper_question` WHERE exam_paper_id=" + str(exam_paper_id) + ") ORDER BY question_number"
+			query_ques = "SELECT id,question_desc FROM exam_question WHERE del_flag=0 AND id in (SELECT exam_question_id FROM `relation_exam_paper_question` WHERE exam_paper_id=" + str(
+				exam_paper_id) + ") ORDER BY question_number"
 			result_ques = mysql.getAllRow(query_ques)
 			questonIds.append(result_ques[0])
 			print  query_ques
@@ -547,7 +570,8 @@ class GetSQL(object):
 
 		fields_collection = "exam_question_id"
 		listfields_collection = fields_collection.split(",")
-		query_collection = "SELECT " + fields_collection + " FROM `collection_question` WHERE del_flag=0 AND user_id=" + str(user_id)
+		query_collection = "SELECT " + fields_collection + " FROM `collection_question` WHERE del_flag=0 AND user_id=" + str(
+			user_id)
 		result_collection = mysql.getAllRow(query_collection)
 		for i in range(len(result_collection)):
 			sql[listfields_collection[i]] = result_collection[i]
@@ -556,7 +580,8 @@ class GetSQL(object):
 		listfields_answer = fields_answer.split(",")
 		listfields_answer[0] = "create_date"
 		query_answer = "SELECT " + fields_answer + " FROM `user_answer` WHERE id IN (SELECT id FROM (SELECT MAX(id) id,exam_paper_id FROM `user_answer` WHERE plan_type='SIMULATION_EXAM' AND user_id=" + str(
-			user_id) + " AND exam_paper_id in( SELECT id FROM `exam_paper` WHERE del_flag=0 AND subject_id="+ str(sql['subject_id'])+") GROUP BY exam_paper_id ) as a) ORDER BY id DESC"
+			user_id) + " AND exam_paper_id in( SELECT id FROM `exam_paper` WHERE del_flag=0 AND subject_id=" + str(
+			sql['subject_id']) + ") GROUP BY exam_paper_id ) as a) ORDER BY id DESC"
 		result_answer = mysql.getAllRow(query_answer)
 		sql['history'] = {}
 		if result_answer == "":
@@ -564,10 +589,10 @@ class GetSQL(object):
 		else:
 			for i in range(len(result_answer)):
 				result_answer[i]
-				if i==0:
+				if i == 0:
 					for j in range(len(result_answer[i])):
 						result_answer[0][j] = Function().convertTimestamp(str(result_answer[0][j]))
-				sql['history'][listfields_answer[i]]= result_answer[i]
+				sql['history'][listfields_answer[i]] = result_answer[i]
 			sql['history']['exam_paper_name'] = []
 			for exam_paper_id in sql['history']['exam_paper_id']:
 				query_name = "SELECT exam_paper_name FROM `exam_paper` WHERE id=" + str(exam_paper_id)
@@ -575,11 +600,54 @@ class GetSQL(object):
 				sql['history']['exam_paper_name'].append(result_name[0])
 		return sql
 
+	def userApm(self, user_id):
+		print "user_id=", user_id
+		mysql = MySQL()
+		sql = {}
+		fields = "title,modifi_date,user_id,highest_apm,default_chance,extra_chance,today_gain,question_sum"
+		listfields = fields.split(",")
+		query = "SELECT " + fields + " FROM `user_apm` WHERE del_flag=0 AND user_id=" + str(user_id)
+		result = mysql.getFistRow(query)
+		for i in range(len(result)):
+			if i == 0:
+				title = PrivateMethod().getApmTile(result[i])
+				result[i] = title
+			if i == 1:
+				result[i] = str(result[i])
+			sql[listfields[i]] = result[i]
+
+		query_count = "SELECT * FROM `user_apm` WHERE del_flag=0"
+		result_count = mysql.getRowCount(query_count)
+		sql['peopleSum'] = result_count
+
+		query_rank = "SELECT " + fields + " FROM `user_apm` WHERE del_flag=0 ORDER BY highest_apm DESC,question_sum DESC LIMIT 100"
+		result_rank = mysql.getAllRow(query_rank)
+		for i in range(len(result_rank)):
+			if i == 0:
+				len_r = len(result_rank[i])
+				if len_r > 0:
+					title = []
+					for k in range(len_r):
+						title.append(PrivateMethod().getApmTile(result_rank[i][k]))
+					result_rank[i] = title
+			if i == 1:
+				len_r = len(result_rank[i])
+				if len_r > 0:
+					modifi_date = []
+					for k in range(len_r):
+						modifi_date.append(str(result_rank[i][k]))
+					result_rank[i] = modifi_date
+			sql[listfields[i] + "_rank"] = result_rank[i]
+
+		return sql
+
+	def update_userApm(self, user_id):
+		print "user_id=", user_id
+		mysql = MySQL()
+		query = "UPDATE `user_apm` SET default_chance =2,today_gain =0 WHERE user_id =" + str(user_id)
+		mysql.editData(query)
+
 
 if __name__ == '__main__':
 	# aa = GetSQL().lastUserQuestion(3,248363)
-	aa = GetSQL().examPapers(3)
-	print aa
-
-
-
+	GetSQL().examPapers(10279)

@@ -17,7 +17,7 @@
     <SUITE FILE_PATH="coverage/InterfaceAssert$Run.coverage" NAME="Run Coverage Results" MODIFIED="1528338832848" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/InterfaceAssert$test__1_.coverage" NAME="test (1) Coverage Results" MODIFIED="1528351180543" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Util" />
     <SUITE FILE_PATH="coverage/InterfaceAssert$CreateRespAssert.coverage" NAME="CreateRespAssert Coverage Results" MODIFIED="1529637752333" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Util" />
-    <SUITE FILE_PATH="coverage/InterfaceAssert$GetSQL.coverage" NAME="GetSQL Coverage Results" MODIFIED="1529914228083" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Common" />
+    <SUITE FILE_PATH="coverage/InterfaceAssert$GetSQL.coverage" NAME="GetSQL Coverage Results" MODIFIED="1529986884816" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Common" />
     <SUITE FILE_PATH="coverage/InterfaceAssert$test.coverage" NAME="test Coverage Results" MODIFIED="1528357953061" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Util" />
     <SUITE FILE_PATH="coverage/InterfaceAssert$CreateParam.coverage" NAME="CreateParam Coverage Results" MODIFIED="1528969154028" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Util" />
     <SUITE FILE_PATH="coverage/InterfaceAssert$UserAnswer.coverage" NAME="UserAnswer Coverage Results" MODIFIED="1528456144809" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Datas/Params" />
@@ -29,20 +29,30 @@
     <SUITE FILE_PATH="coverage/InterfaceAssert$CreateResp.coverage" NAME="CreateResp Coverage Results" MODIFIED="1529637713172" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Util" />
     <SUITE FILE_PATH="coverage/InterfaceAssert$MySQL.coverage" NAME="MySQL Coverage Results" MODIFIED="1528972112344" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Common" />
     <SUITE FILE_PATH="coverage/InterfaceAssert$CreateAPI.coverage" NAME="CreateAPI Coverage Results" MODIFIED="1528789135638" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Util" />
+    <SUITE FILE_PATH="coverage/InterfaceAssert$PrivateMethod.coverage" NAME="PrivateMethod Coverage Results" MODIFIED="1529985539274" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Common" />
   </component>
   <component name="FavoritesManager">
     <favorites_list name="InterfaceAssert" />
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="GetSQL.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="GetSQL.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Common/GetSQL.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="502">
-              <caret line="552" column="64" lean-forward="true" selection-start-line="552" selection-start-column="64" selection-end-line="552" selection-end-column="64" />
+            <state relative-caret-position="337">
+              <caret line="562" column="78" selection-start-line="562" selection-start-column="78" selection-end-line="562" selection-end-column="78" />
               <folding>
                 <element signature="e#15#34#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="做题_套卷模拟.robot" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Cases/Functional_Test/做题_套卷模拟.robot">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="361">
+              <caret line="47" column="78" selection-start-line="47" selection-start-column="78" selection-end-line="47" selection-end-column="78" />
             </state>
           </provider>
         </entry>
@@ -59,10 +69,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>世界杯配对活动随机匹配</find>
-      <find>activity_worldCup_share</find>
-      <find>加入好友邀请</find>
-      <find>/trans/api/v1/order/prePay</find>
       <find>userAnswerId</find>
       <find>/subjects</find>
       <find>definitions/SubjectItem</find>
@@ -89,6 +95,10 @@
       <find>self.mysql</find>
       <find>scoreSum</find>
       <find>data</find>
+      <find>${i}</find>
+      <find>sql_user_apm</find>
+      <find>len</find>
+      <find>sql_alterinfo</find>
     </findStrings>
     <replaceStrings>
       <replace>Parse()</replace>
@@ -105,16 +115,13 @@
       <replace>collection</replace>
       <replace>2</replace>
       <replace>mysql</replace>
+      <replace>${x}</replace>
       <replace>resp</replace>
     </replaceStrings>
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/Util/Activity.robot" />
-        <option value="$PROJECT_DIR$/Datas/Response/Subject.py" />
-        <option value="$PROJECT_DIR$/Util/CreateCase.py" />
-        <option value="$PROJECT_DIR$/Cases/API_Tests_New/Subject.robot" />
         <option value="$PROJECT_DIR$/Util/CreateAll.py" />
         <option value="$PROJECT_DIR$/Cases/API_Tests/Subject.robot" />
         <option value="$PROJECT_DIR$/Util/CreateAPI.py" />
@@ -125,7 +132,6 @@
         <option value="$PROJECT_DIR$/Datas/Params/Users.py" />
         <option value="$PROJECT_DIR$/Cases/Functional_Test/修改考试科目类型.robot" />
         <option value="$PROJECT_DIR$/Cases/Functional_Test/做题_每日一练.robot" />
-        <option value="$PROJECT_DIR$/API/Activity.robot" />
         <option value="$PROJECT_DIR$/Cases/Functional_Test/刷题机.robot" />
         <option value="$PROJECT_DIR$/Cases/Functional_Test/做题_章节活动.robot" />
         <option value="$PROJECT_DIR$/Cases/Functional_Test/做题_B章节活动.robot" />
@@ -136,7 +142,6 @@
         <option value="$PROJECT_DIR$/Cases/Resource/Question.robot" />
         <option value="$PROJECT_DIR$/Cases/Functional_Test/做题_B章节练习.robot" />
         <option value="$PROJECT_DIR$/Cases/Functional_Test/做题_只做错题.robot" />
-        <option value="$PROJECT_DIR$/Cases/Functional_Test/做题_套卷模拟.robot" />
         <option value="$PROJECT_DIR$/Util/Parse.py" />
         <option value="$PROJECT_DIR$/Util/CreateResp.py" />
         <option value="$PROJECT_DIR$/Datas/Response/PkArena.py" />
@@ -145,14 +150,12 @@
         <option value="$PROJECT_DIR$/Cases/Functional_Test/PK_好友PK.robot" />
         <option value="$PROJECT_DIR$/Cases/Resource/PKArena.robot" />
         <option value="$PROJECT_DIR$/Cases/Functional_Test/PK_好友PK完成.robot" />
-        <option value="$PROJECT_DIR$/Base.py" />
         <option value="$PROJECT_DIR$/Cases/Functional_Test/PK_好友PK_LOSE.robot" />
         <option value="$PROJECT_DIR$/Cases/Functional_Test/PK_好友PK_DRAW.robot" />
         <option value="$PROJECT_DIR$/Cases/Functional_Test/PK_好友PK_FINAL_HIT.robot" />
         <option value="$PROJECT_DIR$/Cases/Functional_Test/PK_好友PK_WIN.robot" />
         <option value="$PROJECT_DIR$/Cases/Functional_Test/PK_好友PK_WIN_MARGIN.robot" />
         <option value="$PROJECT_DIR$/Cases/Functional_Test/PK_随机匹配.robot" />
-        <option value="$PROJECT_DIR$/Common/MySQL.py" />
         <option value="$PROJECT_DIR$/Cases/Functional_Test/PK_段位升级.robot" />
         <option value="$PROJECT_DIR$/Cases/Variables/PkArena.py" />
         <option value="$PROJECT_DIR$/Cases/Functional_Test/PK_创造记录.robot" />
@@ -160,8 +163,16 @@
         <option value="$PROJECT_DIR$/Cases/Resource/PkArena.robot" />
         <option value="$PROJECT_DIR$/Cases/Functional_Test/用户.robot" />
         <option value="$PROJECT_DIR$/Cases/Functional_Test/PK_好友PK中途退出.robot" />
+        <option value="$PROJECT_DIR$/API/Activity.robot" />
+        <option value="$PROJECT_DIR$/Common/MySQL.py" />
+        <option value="$PROJECT_DIR$/Cases/Resource/Activity.robot" />
         <option value="$PROJECT_DIR$/Common/PrivateMethod.py" />
+        <option value="$PROJECT_DIR$/Cases/Variables/Activity.py" />
+        <option value="$PROJECT_DIR$/Cases/Functional_Test/活动_刷题机.robot" />
+        <option value="$PROJECT_DIR$/Base.py" />
+        <option value="$PROJECT_DIR$/Cases/Functional_Test/A用户.robot" />
         <option value="$PROJECT_DIR$/Common/GetSQL.py" />
+        <option value="$PROJECT_DIR$/Cases/Functional_Test/做题_套卷模拟.robot" />
       </list>
     </option>
   </component>
@@ -177,11 +188,10 @@
     <detection-done>true</detection-done>
     <sorting>DEFINITION_ORDER</sorting>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="712" />
-    <option name="y" value="112" />
-    <option name="width" value="1572" />
-    <option name="height" value="999" />
+  <component name="ProjectFrameBounds" extendedState="7">
+    <option name="x" value="953" />
+    <option name="width" value="974" />
+    <option name="height" value="1047" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
@@ -195,6 +205,11 @@
             <path>
               <item name="InterfaceAssert" type="b2602c69:ProjectViewProjectNode" />
               <item name="InterfaceAssert" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="InterfaceAssert" type="b2602c69:ProjectViewProjectNode" />
+              <item name="InterfaceAssert" type="462c0819:PsiDirectoryNode" />
+              <item name="API" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="InterfaceAssert" type="b2602c69:ProjectViewProjectNode" />
@@ -255,7 +270,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="com.intellij.ide.scratch.LRUPopupBuilder$2/SQL Dialects" value="MySQL" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="E:/RFCode/Exam_API" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="settings.editor.selected.configurable" value="preferences.externalTools" />
@@ -268,19 +283,19 @@
     </option>
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="E:\RFCode\InterfaceAssert\Cases\Functional_Test" />
-      <recent name="E:\RFCode\InterfaceAssert\Common" />
-      <recent name="E:\RFCode\InterfaceAssert\Util" />
-      <recent name="E:\RFCode\InterfaceAssert\Datas" />
-      <recent name="E:\RFCode\InterfaceAssert\excel" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="E:\RFCode\InterfaceAssert\Common" />
       <recent name="E:\RFCode\InterfaceAssert\Cases\API_Tests_lock" />
       <recent name="E:\RFCode\InterfaceAssert\Cases\API_Tests" />
       <recent name="E:\RFCode\InterfaceAssert\Datas\Params" />
       <recent name="E:\RFCode\InterfaceAssert\Cases" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\GitRepository\SunLands\InterfaceAssert\Cases\Resource" />
+      <recent name="E:\RFCode\InterfaceAssert\Cases\Functional_Test" />
+      <recent name="E:\RFCode\InterfaceAssert\Common" />
+      <recent name="E:\RFCode\InterfaceAssert\Util" />
+      <recent name="E:\RFCode\InterfaceAssert\Datas" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -334,25 +349,6 @@
       <option name="EMULATE_TERMINAL" value="false" />
       <option name="MODULE_MODE" value="false" />
     </configuration>
-    <configuration name="Function" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="InterfaceAssert" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Common" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Common/Function.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-    </configuration>
     <configuration name="GetSQL" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="InterfaceAssert" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -391,20 +387,39 @@
       <option name="EMULATE_TERMINAL" value="false" />
       <option name="MODULE_MODE" value="false" />
     </configuration>
+    <configuration name="PrivateMethod" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="InterfaceAssert" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Common" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Common/PrivateMethod.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+    </configuration>
     <list>
       <item itemvalue="Python.GetSQL" />
       <item itemvalue="Python.CreateRespAssert" />
-      <item itemvalue="Python.Function" />
       <item itemvalue="Python.Parse" />
       <item itemvalue="Python.CreateResp" />
+      <item itemvalue="Python.PrivateMethod" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="Python.GetSQL" />
+        <item itemvalue="Python.PrivateMethod" />
         <item itemvalue="Python.CreateRespAssert" />
         <item itemvalue="Python.CreateResp" />
         <item itemvalue="Python.Parse" />
-        <item itemvalue="Python.Function" />
       </list>
     </recent_temporary>
   </component>
@@ -431,21 +446,20 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="7" />
     <layout>
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32897604" />
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
       <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="9" show_stripe_button="false" />
       <window_info anchor="bottom" id="Python Console" order="10" weight="0.3093682" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.29520696" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.37254903" />
       <window_info anchor="bottom" id="Terminal" order="11" />
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.29847494" visible="true" weight="0.2531983" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.29738563" visible="true" weight="0.14765458" />
       <window_info anchor="bottom" id="Docker" order="12" show_stripe_button="false" />
       <window_info anchor="right" id="Database" order="4" />
       <window_info anchor="right" id="SciView" order="3" />
-      <window_info id="Structure" order="1" sideWeight="0.70152503" side_tool="true" visible="true" weight="0.2531983" />
+      <window_info id="Structure" order="1" sideWeight="0.70261437" side_tool="true" weight="0.15778251" />
       <window_info id="Favorites" order="2" sideWeight="0.70043576" side_tool="true" weight="0.25053304" />
       <window_info anchor="bottom" id="Debug" order="5" weight="0.3943355" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -456,6 +470,29 @@
       <window_info anchor="bottom" id="Cvs" order="3" weight="0.25" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32352942" />
     </layout>
+    <layout-to-restore>
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.29738563" visible="true" weight="0.52625823" />
+      <window_info anchor="bottom" id="Docker" order="12" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Version Control" order="9" show_stripe_button="false" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" id="SciView" order="3" />
+      <window_info id="Structure" order="1" sideWeight="0.70261437" side_tool="true" weight="0.15778251" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" weight="0.32897604" />
+      <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.35643566" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32352942" />
+      <window_info anchor="bottom" id="Python Console" order="10" weight="0.3093682" />
+      <window_info anchor="bottom" id="Debug" order="5" weight="0.3943355" />
+      <window_info anchor="right" id="Database" order="4" />
+      <window_info anchor="bottom" id="Terminal" order="11" />
+      <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
+      <window_info anchor="bottom" id="Inspection" order="4" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="3" weight="0.25" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info id="Favorites" order="2" sideWeight="0.70043576" side_tool="true" weight="0.25053304" />
+    </layout-to-restore>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
@@ -476,34 +513,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/Cases/API_Tests/QuestionType.robot">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="297">
-          <caret line="96" column="54" lean-forward="true" selection-start-line="96" selection-start-column="54" selection-end-line="96" selection-end-column="54" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Datas/Params/UserAnswer.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="10" column="16" selection-start-line="10" selection-start-column="5" selection-end-line="10" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Datas/RespAssert/UserAnswer.robot">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="55">
-          <caret line="13" column="4" selection-start-line="13" selection-start-column="4" selection-end-line="13" selection-end-column="55" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Datas/Response/Users.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="297">
-          <caret line="34" selection-start-line="34" selection-end-line="34" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Util/exam-swagger.yaml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="304">
@@ -536,13 +545,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1300">
           <caret line="106" selection-start-line="106" selection-end-line="106" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Cases/Resource/Question.robot">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="810">
-          <caret line="37" column="53" selection-start-line="37" selection-start-column="53" selection-end-line="37" selection-end-column="53" />
         </state>
       </provider>
     </entry>
@@ -597,24 +599,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Cases/Functional_Test/做题_套卷模拟.robot">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="319">
-          <caret line="29" column="32" selection-start-line="29" selection-start-column="19" selection-end-line="29" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Cases/Functional_Test/做题_B章节练习.robot">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-410">
           <caret line="53" column="101" selection-start-line="53" selection-start-column="88" selection-end-line="53" selection-end-column="101" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Cases/Functional_Test/活动_刷题机.robot">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="10" selection-start-line="10" selection-end-line="23" selection-end-column="51" />
         </state>
       </provider>
     </entry>
@@ -646,13 +634,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Cases/Functional_Test/PK_好友PK_WIN_MARGIN.robot">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="27">
-          <caret line="12" lean-forward="true" selection-start-line="12" selection-end-line="12" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://D:/Python27/Lib/site-packages/pymysql/connections.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="194">
@@ -667,27 +648,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Base.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="436">
-          <caret line="17" column="12" selection-start-line="17" selection-start-column="12" selection-end-line="17" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Cases/Functional_Test/PK_好友PK_LOSE.robot">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1769">
           <caret line="144" column="61" selection-start-line="144" selection-start-column="4" selection-end-line="144" selection-end-column="61" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Common/MySQL.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="706">
-          <caret line="105" selection-start-line="105" selection-end-line="105" />
-          <folding>
-            <element signature="e#15#29#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -700,13 +664,6 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Cases/Functional_Test/PK_C创造记录.robot" />
     <entry file="file://$PROJECT_DIR$/Cases/Functional_Test/PK_B随机匹配.robot" />
-    <entry file="file://$PROJECT_DIR$/Cases/Variables/PkArena.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="571">
-          <caret line="47" column="6" selection-start-line="47" selection-end-line="47" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Cases/Functional_Test/PK_好友PK_WIN.robot">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-1107">
@@ -716,31 +673,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Cases/Functional_Test/QA_活动.robot" />
     <entry file="file://$PROJECT_DIR$/Common/GetSQL.robot" />
-    <entry file="file://$PROJECT_DIR$/Common/Function.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="259">
-          <caret line="72" column="8" selection-start-line="72" selection-start-column="8" selection-end-line="72" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/API/Users.robot">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="621">
-          <caret line="55" selection-start-line="55" selection-end-line="55" selection-end-column="15" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Cases/Functional_Test/AU_用户.robot" />
-    <entry file="file://$PROJECT_DIR$/Cases/Functional_Test/A用户.robot">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="864">
-          <caret line="32" column="77" lean-forward="true" selection-start-line="32" selection-start-column="77" selection-end-line="32" selection-end-column="77" />
-          <folding>
-            <element signature="e#0#289#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Cases/Functional_Test/PK_段位升级.robot">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1647">
@@ -769,23 +702,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Cases/Resource/PkArena.robot">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="298">
-          <caret line="112" column="66" lean-forward="true" selection-start-line="112" selection-start-column="66" selection-end-line="112" selection-end-column="66" />
-          <folding>
-            <element signature="e#0#270#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Common/PrivateMethod.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="409">
-          <caret line="80" column="36" lean-forward="true" selection-start-line="80" selection-start-column="36" selection-end-line="80" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/.PyCharm2018.1/system/python_stubs/1494736245/__builtin__.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="207">
@@ -793,13 +709,137 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Common/Function.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="259">
+          <caret line="89" column="8" selection-start-line="89" selection-start-column="8" selection-end-line="89" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Common/MySQL.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="274">
+          <caret line="100" column="35" selection-start-line="100" selection-start-column="35" selection-end-line="100" selection-end-column="35" />
+          <folding>
+            <element signature="e#15#29#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/API/Users.robot">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="216">
+          <caret line="55" selection-start-line="55" selection-end-line="63" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Cases/Resource/PkArena.robot">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret selection-end-line="6" selection-end-column="47" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/API/Activity.robot">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="297">
+          <caret line="145" selection-start-line="145" selection-end-line="145" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Cases/Resource/Activity.robot">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="10" selection-start-line="10" selection-end-line="10" selection-end-column="18" />
+          <folding>
+            <element signature="e#0#298#1" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Datas/Params/Activity.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="297">
+          <caret line="25" selection-start-line="25" selection-end-line="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Cases/Functional_Test/PK_好友PK_WIN_MARGIN.robot">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="257">
+          <caret line="154" column="49" selection-start-line="154" selection-start-column="49" selection-end-line="154" selection-end-column="49" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Cases/Variables/PkArena.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Cases/Variables/Activity.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="27">
+          <caret line="1" lean-forward="true" selection-start-line="1" selection-end-line="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Cases/Resource/Question.robot">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="595">
+          <caret line="75" column="23" lean-forward="true" selection-start-line="75" selection-start-column="23" selection-end-line="75" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Cases/Functional_Test/活动_刷题机.robot">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="567">
+          <caret line="66" column="44" lean-forward="true" selection-start-line="66" selection-start-column="44" selection-end-line="66" selection-end-column="44" />
+          <folding>
+            <element signature="e#0#298#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Common/PrivateMethod.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1102">
+          <caret line="151" column="26" lean-forward="true" selection-start-line="151" selection-start-column="26" selection-end-line="151" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Base.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="220">
+          <caret line="9" column="29" lean-forward="true" selection-start-line="9" selection-start-column="29" selection-end-line="9" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Cases/Functional_Test/A用户.robot">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="381">
+          <caret line="73" column="51" selection-start-line="73" selection-start-column="51" selection-end-line="73" selection-end-column="51" />
+          <folding>
+            <element signature="e#0#289#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Common/GetSQL.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="502">
-          <caret line="552" column="64" lean-forward="true" selection-start-line="552" selection-start-column="64" selection-end-line="552" selection-end-column="64" />
+        <state relative-caret-position="337">
+          <caret line="562" column="78" selection-start-line="562" selection-start-column="78" selection-end-line="562" selection-end-column="78" />
           <folding>
             <element signature="e#15#34#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Cases/Functional_Test/做题_套卷模拟.robot">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="361">
+          <caret line="47" column="78" selection-start-line="47" selection-start-column="78" selection-end-line="47" selection-end-column="78" />
         </state>
       </provider>
     </entry>

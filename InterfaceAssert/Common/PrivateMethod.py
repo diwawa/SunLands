@@ -1,8 +1,4 @@
 # coding=utf-8
-import time
-import datetime
-import random
-
 
 class PrivateMethod(object):
 	def __init__(self):
@@ -95,7 +91,66 @@ class PrivateMethod(object):
 		data = {"pkgrading": pkgrading, "pkstar": pkstar}
 		return data
 
+	def getApmTile(self,title_int):
+		u'''
+		根据title的int值，返回对应的汉字
+		:param title_int:
+		:return:
+		'''
+		title_int = int(title_int)
+		title = ""
+		if title_int==1:
+			title = u"玉女无痕手"
+		elif title_int == 2:
+			title = u"兰花拂穴手"
+		elif title_int == 3:
+			title = u"隔空点穴手"
+		elif title_int == 4:
+			title = u"葵花点穴手"
+		else:
+			print u"暂时还没有称号"
+
+		return title
+
+	def getApmFinal(self,pointSum):
+		u'''
+		根据点击次数返回获得题量和称号
+		:param pointSum: 点击次数
+		:return:
+		'''
+		final = {"pointSum":pointSum}
+		pointSum = int(pointSum)
+		if pointSum == 0:
+			final['question'] = 0
+		elif 0 < pointSum < 10:
+			final['question'] = 5
+		elif 10 <= pointSum < 20:
+			final['question'] = 10
+		elif 20 <= pointSum < 30:
+			final['question'] = 15
+		elif 30 <= pointSum < 45:
+			final['question'] = 20
+		elif 45 <= pointSum < 60:
+			final['question'] = 25
+		elif 60 <= pointSum < 80:
+			final['question'] = 30
+		else:
+			final['question'] = 35
+
+		if 0 <= pointSum < 40:
+			final['title'] = u"玉女无痕手"
+		elif 40 <= pointSum < 60:
+			final['title'] = u"兰花拂穴手"
+		elif 60 <= pointSum < 100:
+			final['title'] = u"隔空点穴手"
+		else:
+			final['title'] = u"葵花点穴手"
+
+		return final
+
 
 if __name__ == '__main__':
 	f = PrivateMethod()
-	print f.convertSeconds("0'50")
+	aa =  f.getApmFinal(80)
+	for key in aa:
+		print key ,":" ,aa[key]

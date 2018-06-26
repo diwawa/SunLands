@@ -131,11 +131,11 @@ post/activity/join
 
 
 get/activity/pointQuestion/final
-	[Arguments]    ${token}    ${sum}
+	[Arguments]    ${token}    ${sum}    ${questionObtain}
 	[Documentation]    小心心提交点击次数，返回数据
 	Create Session    exam    https://exam.zmgongzuoshi.top/api/v1
 	${headers}    Create Dictionary    Authorization    ${token}
-	${params}    Create Dictionary    sum    ${sum}
+	${params}    Create Dictionary    num    ${sum}     questionObtain    ${questionObtain}
 	${resp}    get request    exam    /activity/pointQuestion/final    headers=${headers}    params=${params}
 	should be equal as integers    ${resp.status_code}    200    ${resp.content}
 	${json}    to json    ${resp.content}
