@@ -66,7 +66,7 @@ userAnswer_userAnswerId
     ${correctnum}    set variable    0
     : FOR    ${x}    IN RANGE    ${len}
     \    ${answerDate}    convertTimestamp    ${resp['questions'][${x}]['answerDate']}
-    \    Comment    should be equal as integers    ${answerDate}    1528449161
+    \    should be equal as integers    ${answerDate}    ${questions[${x}]['answerDate']}
     \    should be equal as integers    ${resp['questions'][${x}]['questionId']}    ${questionIds[${x}]}
     \    ${sql_question}    Question    ${resp['questions'][${x}]['questionId']}
     \    Should Be Equal    ${resp['questions'][${x}]['correctAnswer']}    ${sql_question['correct_answer']}

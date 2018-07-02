@@ -39,8 +39,17 @@
       <file leaf-file-name="做题_B章节练习.robot" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Cases/Functional_Test/做题_B章节练习.robot">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-728">
-              <caret line="48" column="36" selection-start-line="48" selection-start-column="36" selection-end-line="48" selection-end-column="36" />
+            <state relative-caret-position="514">
+              <caret line="69" column="56" lean-forward="true" selection-start-line="69" selection-start-column="56" selection-end-line="69" selection-end-column="88" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="UserAnswer.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Datas/Params/UserAnswer.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="378">
+              <caret line="14" column="15" selection-start-line="14" selection-start-column="5" selection-end-line="14" selection-end-column="15" />
             </state>
           </provider>
         </entry>
@@ -48,8 +57,8 @@
       <file leaf-file-name="做题_只做错题.robot" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Cases/Functional_Test/做题_只做错题.robot">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="973">
-              <caret line="68" column="78" selection-start-line="68" selection-start-column="78" selection-end-line="68" selection-end-column="78" />
+            <state relative-caret-position="433">
+              <caret line="68" column="9" selection-start-line="68" selection-start-column="9" selection-end-line="68" selection-end-column="9" />
             </state>
           </provider>
         </entry>
@@ -57,7 +66,7 @@
       <file leaf-file-name="做题_我的收藏.robot" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Cases/Functional_Test/做题_我的收藏.robot">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="517">
+            <state relative-caret-position="1594">
               <caret line="92" column="73" selection-start-line="92" selection-start-column="73" selection-end-line="92" selection-end-column="73" />
               <folding>
                 <element signature="e#0#359#0" expanded="true" />
@@ -66,20 +75,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="做题_套卷模拟.robot" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Cases/Functional_Test/做题_套卷模拟.robot">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2377">
-              <caret line="109" column="37" selection-start-line="109" selection-start-column="37" selection-end-line="109" selection-end-column="37" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="做题_我的错题.robot" pinned="false" current-in-tab="false">
+      <file leaf-file-name="做题_我的错题.robot" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Cases/Functional_Test/做题_我的错题.robot">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1189">
-              <caret line="74" column="60" selection-start-line="74" selection-start-column="60" selection-end-line="74" selection-end-column="60" />
+            <state relative-caret-position="324">
+              <caret line="12" column="17" lean-forward="true" selection-start-line="12" selection-start-column="17" selection-end-line="12" selection-end-column="17" />
               <folding>
                 <element signature="e#0#292#0" expanded="true" />
               </folding>
@@ -87,11 +87,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="A修改考试科目类型.robot" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Cases/Functional_Test/A修改考试科目类型.robot">
+      <file leaf-file-name="做题_套卷模拟.robot" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Cases/Functional_Test/做题_套卷模拟.robot">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="108">
-              <caret line="4" column="31" selection-start-line="4" selection-start-column="31" selection-end-line="4" selection-end-column="31" />
+            <state relative-caret-position="567">
+              <caret line="68" column="9" selection-start-line="68" selection-start-column="9" selection-end-line="68" selection-end-column="9" />
             </state>
           </provider>
         </entry>
@@ -120,11 +120,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="PK_好友PK_DRAW.robot" pinned="false" current-in-tab="true">
+      <file leaf-file-name="PK_好友PK_DRAW.robot" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Cases/Functional_Test/PK_好友PK_DRAW.robot">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="459">
-              <caret line="138" column="50" selection-start-line="138" selection-start-column="50" selection-end-line="138" selection-end-column="50" />
+            <state relative-caret-position="405">
+              <caret line="131" column="46" lean-forward="true" selection-start-line="131" selection-start-column="46" selection-end-line="131" selection-end-column="46" />
             </state>
           </provider>
         </entry>
@@ -244,16 +244,16 @@
         <option value="$PROJECT_DIR$/Cases/Functional_Test/用户.robot" />
         <option value="$PROJECT_DIR$/Cases/Functional_Test/做题_A每日一练.robot" />
         <option value="$PROJECT_DIR$/Cases/Resource/PkArena.robot" />
-        <option value="$PROJECT_DIR$/Cases/Functional_Test/做题_只做错题.robot" />
-        <option value="$PROJECT_DIR$/Cases/Functional_Test/做题_套卷模拟.robot" />
         <option value="$PROJECT_DIR$/Cases/Functional_Test/PK_好友PK中途退出.robot" />
         <option value="$PROJECT_DIR$/Base.py" />
         <option value="$PROJECT_DIR$/Common/Function.py" />
         <option value="$PROJECT_DIR$/Cases/Functional_Test/做题_我的错题.robot" />
-        <option value="$PROJECT_DIR$/Cases/Functional_Test/做题_B章节练习.robot" />
         <option value="$PROJECT_DIR$/Cases/Functional_Test/A修改考试科目类型.robot" />
         <option value="$PROJECT_DIR$/Cases/Functional_Test/做题_我的收藏.robot" />
         <option value="$PROJECT_DIR$/Common/GetSQL.py" />
+        <option value="$PROJECT_DIR$/Cases/Functional_Test/做题_B章节练习.robot" />
+        <option value="$PROJECT_DIR$/Cases/Functional_Test/做题_只做错题.robot" />
+        <option value="$PROJECT_DIR$/Cases/Functional_Test/做题_套卷模拟.robot" />
       </list>
     </option>
   </component>
@@ -595,13 +595,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/API/PkArena.robot">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="406">
-          <caret line="120" selection-start-line="120" selection-end-line="120" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Cases/Functional_Test/PK_C创造记录.robot" />
     <entry file="file://$PROJECT_DIR$/Cases/Functional_Test/PK_B随机匹配.robot" />
     <entry file="file://$PROJECT_DIR$/Cases/Functional_Test/QA_活动.robot" />
@@ -754,13 +747,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Datas/Params/UserAnswer.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="378">
-          <caret line="14" column="24" selection-start-line="14" selection-start-column="24" selection-end-line="14" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Datas/Params/Subject.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="54">
@@ -847,58 +833,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Cases/Functional_Test/做题_A每日一练.robot">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="540">
-          <caret line="89" column="48" selection-start-line="89" selection-start-column="25" selection-end-line="89" selection-end-column="48" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Cases/Functional_Test/做题_我的错题.robot">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1189">
-          <caret line="74" column="60" selection-start-line="74" selection-start-column="60" selection-end-line="74" selection-end-column="60" />
-          <folding>
-            <element signature="e#0#292#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Cases/Functional_Test/A修改考试科目类型.robot">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="108">
           <caret line="4" column="31" selection-start-line="4" selection-start-column="31" selection-end-line="4" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Cases/Functional_Test/做题_套卷模拟.robot">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2377">
-          <caret line="109" column="37" selection-start-line="109" selection-start-column="37" selection-end-line="109" selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Cases/Functional_Test/做题_我的收藏.robot">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="517">
-          <caret line="92" column="73" selection-start-line="92" selection-start-column="73" selection-end-line="92" selection-end-column="73" />
-          <folding>
-            <element signature="e#0#359#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Cases/Functional_Test/做题_只做错题.robot">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="973">
-          <caret line="68" column="78" selection-start-line="68" selection-start-column="78" selection-end-line="68" selection-end-column="78" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Cases/Functional_Test/做题_B章节练习.robot">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-728">
-          <caret line="48" column="36" selection-start-line="48" selection-start-column="36" selection-end-line="48" selection-end-column="36" />
         </state>
       </provider>
     </entry>
@@ -924,8 +862,66 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Cases/Functional_Test/PK_好友PK_DRAW.robot">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="459">
-          <caret line="138" column="50" selection-start-line="138" selection-start-column="50" selection-end-line="138" selection-end-column="50" />
+        <state relative-caret-position="405">
+          <caret line="131" column="46" lean-forward="true" selection-start-line="131" selection-start-column="46" selection-end-line="131" selection-end-column="46" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Cases/Functional_Test/做题_A每日一练.robot">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="540">
+          <caret line="89" column="48" selection-start-line="89" selection-start-column="25" selection-end-line="89" selection-end-column="48" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Datas/Params/QuestionType.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Datas/Params/UserAnswer.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="378">
+          <caret line="14" column="15" selection-start-line="14" selection-start-column="5" selection-end-line="14" selection-end-column="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Cases/Functional_Test/做题_B章节练习.robot">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="514">
+          <caret line="69" column="56" lean-forward="true" selection-start-line="69" selection-start-column="56" selection-end-line="69" selection-end-column="88" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Cases/Functional_Test/做题_只做错题.robot">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="433">
+          <caret line="68" column="9" selection-start-line="68" selection-start-column="9" selection-end-line="68" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Cases/Functional_Test/做题_套卷模拟.robot">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="567">
+          <caret line="68" column="9" selection-start-line="68" selection-start-column="9" selection-end-line="68" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Cases/Functional_Test/做题_我的收藏.robot">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1594">
+          <caret line="92" column="73" selection-start-line="92" selection-start-column="73" selection-end-line="92" selection-end-column="73" />
+          <folding>
+            <element signature="e#0#359#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Cases/Functional_Test/做题_我的错题.robot">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="324">
+          <caret line="12" column="17" lean-forward="true" selection-start-line="12" selection-start-column="17" selection-end-line="12" selection-end-column="17" />
+          <folding>
+            <element signature="e#0#292#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
