@@ -1,4 +1,4 @@
 # coding=utf-8
 subjects_param = {
-	'examTypeId': '2'}
+	'examTypeId': '4'}
 

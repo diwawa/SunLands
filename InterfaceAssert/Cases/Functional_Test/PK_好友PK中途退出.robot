@@ -151,7 +151,7 @@ pkArena_pkAnswer2
 	set to dictionary      ${pkAnswerPostParam}    questionId    ${sql_pklog['question_ids'][0]}
 	set to dictionary      ${pkAnswerPostParam}    pkLogId    ${pkLogId}
 	${sql_question}    question      ${questionId}
-	${options_desc}    to json     ${sql_question['options_desc']}
+	${options_desc}    set variable     ${sql_question['options_desc']}
 	${keys}     get dictionary keys      ${options_desc}
 	remove values from list      ${keys}    ${sql_question['correct_answer']}
 	${targetUserAnswer}    getRandomStr      ${keys}
@@ -167,11 +167,12 @@ pkArena_targetAnswerDetail
 	[Documentation]    查询对手答题详情
 	[Tags]    Run
 	${resp}    get/pkArena/targetAnswerDetail    ${token}    ${pkLogId}    ${questionId}
+	should be equal as integers    ${resp['targetUserScoreSum']}   0
 	should be equal as strings    ${resp['targetUserAnswer']}    ${targetUserAnswer}
 	should be equal as integers    ${resp['targetUserScore']}    0
 	should be equal as integers    ${resp['targetUserDuration']}    2
 	should be equal as strings    ${resp['correctAnswer']}     ${currentUserAnswer}
-	should be equal as integers    ${resp['targetUserScoreSum']}   0
+
 
 pkArena_targetAnswerDetail2
 	[Documentation]    对手查询自己答题详情

@@ -193,6 +193,20 @@ class Function(object):
 			re_dict["ResponseType"] = type2
 		return re_dict
 
+	def contain_zh(self, word):
+		u'''
+		判断word中是否有中文
+		:return:
+		'''
+		import re
+		zh_pattern = re.compile(u'[\u4e00-\u9fa5]+')
+		word = word.decode("utf-8")
+		match = zh_pattern.search(word)
+		# if match:
+		# 	zh = re.findall(zh_pattern, word)
+		# 	for c in zh:
+		# 		word = word.replace(c, "zhongwen")
+		return match
 
 if __name__ == '__main__':
 	f = Function()

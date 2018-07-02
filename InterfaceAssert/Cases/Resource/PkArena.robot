@@ -110,7 +110,7 @@ PK_每题_得分
 	${questionId}    set variable     ${sql_pklog['question_ids'][${questionNum}]}
 	set to dictionary      ${pkAnswerPostParam}    questionId    ${questionId}
 	${sql_question}    question      ${questionId}
-	${options_desc}    to json     ${sql_question['options_desc']}
+	${options_desc}    set variable     ${sql_question['options_desc']}
 	${keys}     get dictionary keys      ${options_desc}
 	remove values from list      ${keys}    ${sql_question['correct_answer']}
 	${error_answer}    getRandomStr      ${keys}

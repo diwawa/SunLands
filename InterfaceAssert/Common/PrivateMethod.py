@@ -1,4 +1,5 @@
 # coding=utf-8
+import random
 
 class PrivateMethod(object):
 	def __init__(self):
@@ -147,6 +148,43 @@ class PrivateMethod(object):
 			final['title'] = u"葵花点穴手"
 
 		return final
+
+	def listToString(self,list):
+		u'''
+		将list转换为string，元素之间 ， 隔开
+		:param:list
+		:return:string
+		'''
+		string = ''
+		for i in range(len(list)):
+			string += str(list[i])
+			if i == len(list) - 1:
+				break
+			else:
+				string += ','
+		return string
+
+	def getQuestion(self,qtype, options):
+		u'''
+		根据题目类型和选项获得答案
+		:param:qtype,options
+		:return:answer
+		'''
+		answer = []
+		if qtype == 'SINGLE_ANSWER' or qtype == 'JUDGE_ANSWER':
+			answer.append(random.choice(options))
+		elif qtype == 'MULTIPLE_ANSWER':
+			l = len(options)
+			n = random.randint(1, int(l))
+			for i in range(n):
+				ele = random.choice(options)
+				if ele in answer:
+					pass
+				else:
+					answer.append(ele)
+		else:
+			pass
+		return answer
 
 
 if __name__ == '__main__':

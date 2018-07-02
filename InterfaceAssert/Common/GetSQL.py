@@ -263,13 +263,24 @@ class GetSQL(object):
 		for i in range(len(result)):
 			sql[listfields[i]] = result[i]
 
-		options_desc = sql['options_desc']
-		if "\'" in options_desc:
-			print 111
-			options_desc = options_desc.replace("\'", "\"")
-		else:
-			pass
-		sql['options_desc'] = options_desc
+		options_desc = sql['options_desc'].encode("utf-8")
+		print options_desc
+		options_desc = options_desc[1:-1].split(",")
+		options_desc_v = {}
+		for op in options_desc:
+			op = op.split(":")
+			key = op[0].strip()[1:-1]
+			value = op[1].strip()[1:-1]
+			if Function().contain_zh(value):
+				value = value.decode("utf-8")
+			options_desc_v[key] = value
+		sql['options_desc'] = options_desc_v
+
+		# if "\'" in options_desc:
+		# 	options_desc = options_desc.replace("\'", "\"")
+		# else:
+		# 	pass
+		# sql['options_desc'] = options_desc
 
 		query_1 = " SELECT * FROM `last_user_question` WHERE question_id=" + str(question_id) + " AND error_num>0"
 		query_4 = " SELECT * FROM `last_user_question` WHERE question_id=" + str(question_id)
@@ -542,7 +553,8 @@ class GetSQL(object):
 		fields_paper = "id,done_sum,exam_paper_name,type,year,question_sum,score_sum"
 		listfields_paper = fields_paper.split(",")
 		query_paper = "SELECT " + fields_paper + " FROM `exam_paper` WHERE del_flag=0 AND subject_id=" + str(
-			sql['subject_id']) + " ORDER BY `year` DESC"
+			sql['subject_id']) + " ORDER BY `year` DESC ,type DESC"
+		print query_paper
 		result_paper = mysql.getAllRow(query_paper)
 		if result_paper == "":
 			for i in range(len(listfields_paper)):
@@ -561,7 +573,7 @@ class GetSQL(object):
 			isDone.append(result_id)
 
 			query_ques = "SELECT id,question_desc FROM exam_question WHERE del_flag=0 AND id in (SELECT exam_question_id FROM `relation_exam_paper_question` WHERE exam_paper_id=" + str(
-				exam_paper_id) + ") ORDER BY question_number"
+				exam_paper_id) + ") ORDER BY question_number, id"
 			result_ques = mysql.getAllRow(query_ques)
 			questonIds.append(result_ques[0])
 			print  query_ques
@@ -647,7 +659,25 @@ class GetSQL(object):
 		query = "UPDATE `user_apm` SET default_chance =2,today_gain =0 WHERE user_id =" + str(user_id)
 		mysql.editData(query)
 
+	def exam_question(self, question_id):
+		u'''
+		通过questionId，获取问题类型，正确答案，所有答案
+		:param question_id:
+		:return:  dict
+		'''
+		print "question_id=", question_id
+		mysql = MySQL()
+		sql = {}
+		fields = "question_type,correct_answer,options_desc"
+		listfields = fields.split(",")
+		query = "SELECT " + fields + " FROM exam_question WHERE id=" + str(question_id)
+		result = mysql.getFistRow(query)
+		for i in range(len(result)):
+			sql[listfields[i]] = result[i]
+		return sql
+
 
 if __name__ == '__main__':
 	# aa = GetSQL().lastUserQuestion(3,248363)
-	GetSQL().examPapers(10279)
+	bb = GetSQL().question(121730)
+	print bb
