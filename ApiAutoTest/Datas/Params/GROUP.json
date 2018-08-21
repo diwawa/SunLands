@@ -1,0 +1,22 @@
+{
+   "post/trans/api/v1/group/create": {
+    "activityId": 1,
+    "commodityId": 2
+  },
+  "post/trans/api/v1/group/add/{id}": {
+    "id": 384
+  },
+  "get/trans/api/v1/group/getGroupInfo": {
+    "id": 384
+  },
+  "get/trans/api/v1/group/list": {
+    "activityId": 1
+  },
+  "get/trans/api/v1/group/groupList": {
+    "status": 1,
+    "activityId": 1
+  },
+  "get/trans/api/v1/group/isAdd": {
+    "activityId": 1
+  }
+}

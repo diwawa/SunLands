@@ -1,0 +1,13 @@
+{
+  "get/subjects/videosInfo": {
+    "videosInfoId": 0
+  },
+  "post/subjects/courses/peopleSum": {
+    "courseId": {
+      "courseId": 0
+    },
+    "method": "body"
+  },"get/subjects": {
+    "examTypeId": "2"
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "post/activity/valentines/form": {
+    "hopeSex": "string",
+    "selfSex": "string"
+  },
+  "get/activity/goods": {
+    "phoneNumber": "string"
+  },
+  "get/activity/decodeUserInfo": {
+    "code": 42,
+    "type": 42,
+    "encryptedData": 42,
+    "iv": 42
+  },
+  "get/activity/pointQuestion/home": {
+    "shareMark": ""
+  },
+  "post/activity/draw/help": {
+    "mark": "string"
+  },
+  "get/activity/draw/shareUser": {
+    "mark": ""
+  },
+  "post/activity/worldCup/join": {
+    "mark": "SUWm3RL_5BrDX4lwlRZpQ1Ap5Lpp1w"
+  },
+  "get/activity/worldCup/match": {
+    "selfSex": "男"
+  },
+  "get/activity/pointQuestion/final": {
+    "questionObtain": true,
+    "num": 42
+  },
+  "post/activity/worldCup/invite": {
+    "selfSex": "女"
+  },
+  "post/activity/draw/join": {
+    "DrawType": "ELYNLOVER"
+  },
+  "get/activity/worldCup/teamDetails": {
+    "teamId": ""
+  },
+  "get/activity/details": {
+    "mark": "string"
+  },
+  "get/activity/worldCup/share": {
+    "mark": "SUWm3RL_5BrDX4lwlRZpQ1Ap5Lpp1w"
+  }
+}

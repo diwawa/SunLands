@@ -1,0 +1,29 @@
+{
+  "get/learningPlan/provinces": {
+    "provinceName": "北京市"
+  },
+  "get/learningPlan/examTimes": {
+    "provinceId": 3
+  },
+  "put/learningPlan/update": {
+    "learningPlanParam": {
+      "examTypeId": 2,
+      "learningPlanId": 164,
+      "subjectIds": "24,25,26",
+      "provinceId": 3,
+      "examTime": "2019-10-01 09:00:00"
+    }
+  },
+  "get/learningPlan/dailyPlanQuestions": {
+    "subjectIds": "24,25,26",
+    "examTime": "2019-10-01 09:00:00"
+  },
+  "post/learningPlan": {
+    "learningPlanParam": {
+      "examTypeId": 15,
+      "subjectIds": "165,166",
+      "provinceId": 3,
+      "examTime": "2019-10-01 09:00:00"
+    }
+  }
+}

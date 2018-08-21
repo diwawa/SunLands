@@ -1,0 +1,50 @@
+{
+  "post/pkArena/pkAnswer": {
+    "pkAnswerPostParam": {
+        "questionId": 42,
+        "pkLogId": 42,
+        "currentUserAnswer": "A",
+        "currentUserDuration": 2
+      }
+  },
+  "get/pkArena/pkFinal/share": {
+    "shareMark": "ugZqo0bJ0nFit52RD-0jTXmtsfDWCQ51047"
+  },
+  "get/pkArena/pkFinal": {
+    "pkLogId": 42
+  },
+  "get/pkArena/danGradingTips": {
+    "pkLogId": 42
+  },
+  "get/pkArena/targetAnswerDetail": {
+    "questionId": 42,
+    "pkLogId": 42
+  },
+  "post/pkArena/quit": {
+    "pkLogId": 42
+  },
+  "get/pkArena/pkQuestions": {
+    "questionId": "",
+    "pkLogId": 42
+  },
+  "get/pkArena/pkDynamicImg/{userId}/{pkLogId}": {
+    "userId": 130395,
+    "pkLogId": 42
+  },
+  "get/pkArena/pkMatch": {
+    "shareMark": "string",
+    "selfPlay": false
+  },
+  "post/pkArena/join": {
+    "shareMark": "string"
+  },
+  "userShare":{
+    "shareType": "PK",
+    "shareMark": ""
+  },
+  "pkShare":{
+    "shareType": "PK",
+    "pkLogId": ""
+  }
+
+}

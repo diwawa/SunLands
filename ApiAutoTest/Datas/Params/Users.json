@@ -1,0 +1,61 @@
+{
+  "get/users/token/refresh": {
+    "token": "string",
+    "refreshToken": "string"
+  },
+  "put/users/examTypes": {
+    "examTypeId": 2,
+    "recomment": true
+  },
+  "post/users/advice": {
+    "content": "反馈内容好不好",
+    "userIp": "172.16.165.133"
+  },
+  "get/users/token": {
+    "code": 42,
+    "shareFrom": 42,
+    "encryptedData": 42,
+    "sceneCode": 42,
+    "iv": 42
+  },
+  "put/users/subjects": {
+    "subjectId": 24
+  },
+  "post/users/conllects/{questionId}": {
+    "questionId": 43230
+  },
+  "get/users/versions": {
+    "code": 2.0
+  },
+  "post/users/unchainPaper": {
+    "userCodeView": [
+      {
+        "unchainType": "string",
+        "code": "string",
+        "encryptedData": "string",
+        "iv": "string"
+      }
+    ]
+  },
+  "post/users/survey": {
+    "userSurveyView": [
+      {
+        "questions": {
+          "questionId": "1",
+          "answerDesc": "A"
+        }
+      }
+    ]
+  },
+  "get/users/share": {
+    "shareType": "DATA",
+    "pkLogId": ""
+  },
+  "get/users/me/info": {
+    "mark": ""
+  },
+  "get/users/me": {
+    "lat": "116.653207",
+    "lon": "39.964281"
+  }
+}

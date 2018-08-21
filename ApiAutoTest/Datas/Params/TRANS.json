@@ -1,0 +1,29 @@
+{
+  "post/trans/api/v1/order/pay": {
+    "orderCode": "string"
+  },
+  "post/trans/api/v1/order/prePay": {
+    "userOrderPostParam": {
+        "0": {
+          "commodityId": 4,
+          "commodityNum": 1
+        },
+        "prePayType": "CUT"
+      }
+  },
+  "get/trans/api/v1/users/token": {
+    "code": "string"
+  },
+  "get/trans/api/v1/commodity/already/details": {
+    "commodityId": 42
+  },
+  "get/trans/api/v1/commodity/system/status": {
+    "commodityIds":[1]
+  },
+  "get/trans/api/v1/commodity/system/details": {
+    "commodityId": 42
+  },
+  "get/trans/api/v1/commodity/recommend": {
+    "activityType": ""
+  }
+}

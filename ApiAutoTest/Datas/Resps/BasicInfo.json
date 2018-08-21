@@ -1,0 +1,25 @@
+{
+  "asserBasicInfo": {
+    "home": {
+      "nickName": "nickName",
+      "headImageUrl": "headImageUrl"
+    },
+    "me": {
+      "headImageUrl": "headImageUrl",
+      "nickName": "nickName",
+      "examType": "examTypeName",
+      "examTypeId": "examTypeId",
+      "currentSubject": "subjectName",
+      "categories": "parentName",
+      "examTimeInfo": "examTimeInfo"
+    },
+    "me_info":{
+      "nickName":"nickName",
+      "headImageUrl":"headImageUrl"
+    }
+  },
+  "editExamType": {
+    "examType": "公共课（专）",
+    "currentSubject": "思想道德修养与法律基础"
+  }
+}

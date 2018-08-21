@@ -1,0 +1,37 @@
+{
+  "get/dailyPractice/calendar": {
+    "year": 2018,
+    "month": 7
+  },
+  "get/dailyPractice/examPapers": {
+    "month": 7,
+    "number": 16,
+    "year": 2018
+  },
+  "getQuestionList": {
+    "needAnswer": 0,
+    "planType": "DAILY_PRACTICE",
+    "needError": 0,
+    "stratumId": 0,
+    "needHistory": 0
+  },
+  "userAnswer": {
+    "userAnswerPostParam": {
+      "assignmentId": "",
+      "userAnswerId": "",
+      "examPaperId": "",
+      "answerPlanId": "",
+      "planType": "DAILY_PRACTICE",
+      "questions": [
+        {
+          "answerDate": 1532058495,
+          "questionId": "string",
+          "duration": 5,
+          "answerDesc": "A"
+        }
+      ],
+      "duration": 50,
+      "chapterId": ""
+    }
+  }
+}

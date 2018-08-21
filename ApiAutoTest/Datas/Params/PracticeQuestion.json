@@ -1,0 +1,72 @@
+{
+  "chapters": {
+    "chapters": {
+      "planType": "CHAPTER_PRACTICE"
+    },
+    "examQuestion": {
+      "needAnswer": 0,
+      "planType": "CHAPTER_PRACTICE",
+      "needError": 0,
+      "stratumId": 29848,
+      "needHistory": 0
+    },
+    "userAnswer": {
+      "assignmentId": "",
+      "userAnswerId": "",
+      "examPaperId": "",
+      "answerPlanId": "",
+      "planType": "CHAPTER_PRACTICE",
+      "questions": [
+        {
+          "answerDate": 1532488031329,
+          "questionId": "string",
+          "duration": 5,
+          "answerDesc": "A"
+        }
+      ],
+      "duration": 50,
+      "chapterId": ""
+    },
+    "userAnswerId": {
+      "infoType": "answerDone",
+      "userAnswerId": 243087
+    }
+  },
+  "pkArena": {
+    "share": {
+      "shareType": "PK",
+      "shareMark": ""
+    },
+    "join": {
+      "shareMark": ""
+    },
+    "pkMatch": {
+      "shareMark": "",
+      "selfPlay": false
+    },
+    "pkQuestions": {
+      "questionId": "",
+      "pkLogId": 42
+    },
+    "pkAnswer": {
+      "questionId": 42,
+      "pkLogId": 42,
+      "currentUserAnswer": "A",
+      "currentUserDuration": 2
+    },
+    "targetAnswerDetail": {
+      "questionId": 42,
+      "pkLogId": 42
+    },
+    "pkFinal": {
+      "pkLogId": 42
+    },
+    "sharefinal":{
+      "shareType": "PK",
+      "pkLogId": ""
+    },
+    "pkFinalshare":{
+       "shareMark": ""
+    }
+  }
+}

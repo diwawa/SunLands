@@ -1,0 +1,20 @@
+{
+  "post/questionTypes/next": {
+    "planType": "CHAPTER_PRACTICE",
+    "chapterId": "chapterId"
+  },
+  "get/questionTypes/examQuestion": {
+    "needAnswer": 0,
+    "planType": "CHAPTER_PRACTICE",
+    "needError": 0,
+    "stratumId": "chapterId",
+    "needHistory": 0
+  },
+  "get/questionTypes/myQuestionStem/{chapterId}": {
+    "chapterId": "chapterId",
+    "planType": "MY_COLLECT"
+  },
+  "get/questionTypes/chapters": {
+    "planType": "MY_COLLECT"
+  }
+}

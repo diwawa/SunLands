@@ -1,0 +1,24 @@
+{
+  "asserBasicInfo":{
+    "me": {
+      "lat": "11",
+      "lon": "22"
+    },
+    "me_info":{
+       "mark": ""
+    }
+  },
+  "editExamType": {
+    "me": {
+      "lat": "116.653207",
+      "lon": "39.964281"
+    },
+    "examTypes": {
+      "examTypeId": 2,
+      "recomment": false
+    },
+    "subjects": {
+      "subjectId": 24
+    }
+  }
+}

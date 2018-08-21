@@ -1,0 +1,60 @@
+{
+  "coinMessagePush": {
+    "push": {
+      "messageType": "DETAILS"
+    },
+    "luckPush": {
+      "messageType": "DRAW"
+    }
+  },
+  "dailyPractice": {
+    "examPapers": {
+      "month": 7,
+      "number": 24,
+      "year": 2018
+    },
+    "examQuestion": {
+      "needAnswer": 0,
+      "planType": "DAILY_PRACTICE",
+      "needError": 0,
+      "stratumId": 29848,
+      "needHistory": 0
+    },
+    "userAnswer": {
+      "assignmentId": "",
+      "userAnswerId": "",
+      "examPaperId": "",
+      "answerPlanId": "",
+      "planType": "DAILY_PRACTICE",
+      "questions": [
+        {
+          "answerDate": 1532058495,
+          "questionId": "string",
+          "duration": 5,
+          "answerDesc": "A"
+        }
+      ],
+      "duration": 50,
+      "chapterId": ""
+    }
+  },
+  "pkArena": {
+    "pkMatch": {
+      "shareMark": "",
+      "selfPlay": false
+    },
+    "pkQuestions": {
+      "questionId": "",
+      "pkLogId": 42
+    },
+    "pkAnswer": {
+      "questionId": 42,
+      "pkLogId": 42,
+      "currentUserAnswer": "A",
+      "currentUserDuration": 2
+    },
+    "pkFinal": {
+      "pkLogId": 42
+    }
+  }
+}

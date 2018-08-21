@@ -1,0 +1,5 @@
+{
+  "get/ranking/pkArena": {
+    "filter": "friends"
+  }
+}

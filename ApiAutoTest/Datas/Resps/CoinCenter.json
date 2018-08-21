@@ -1,0 +1,30 @@
+{
+  "signIn": {
+    "month": [
+      {
+        "mode": 1,
+        "type": 1,
+        "count": 1
+      }
+    ]
+  },
+  "dailyPractice": {
+    "month": [
+      {
+        "mode": 2,
+        "type": 1,
+        "count": 10
+      }
+    ]
+  },
+  "pkArena": {
+    "month": [
+      {
+        "mode": 4,
+        "type": 1,
+        "count": 3
+      }
+    ]
+  }
+
+}

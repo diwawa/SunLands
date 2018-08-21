@@ -1,0 +1,10 @@
+{
+  "re_userAnswer": [
+    {
+      "answerDate": "string",
+      "questionId": "string",
+      "duration": 42,
+      "answerDesc": "string"
+    }
+  ]
+}

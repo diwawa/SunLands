@@ -1,0 +1,29 @@
+{
+  "post/trans/api/v1/cutPrice/systemCutPrice": {
+    "method": "body",
+    "systemCutPriceRequest": {
+      "commodityId": 42,
+      "type": 42,
+      "costPrice": "string"
+    }
+  },
+  "post/trans/api/v1/cutPrice/reSystemCutPrice": {
+    "method": "body",
+    "systemCutPriceRequest": {
+      "commodityId": 5,
+      "type": 0,
+      "costPrice": "298000"
+    }
+  },
+  "get/trans/api/v1/cutPrice/getCommodityInfo": {
+    "commodityId": 5,
+    "mark": "KaUzJOtPtZx1ndZw66hsIYKnfNRYhQ"
+  },
+  "post/trans/api/v1/cutPrice/friendsCutPrice": {
+    "friendsCutPriceRequest": {
+      "commodityId": 5,
+      "mark": "KaUzJOtPtZx1ndZw66hsIYKnfNRYhQ"
+    },
+    "method": "body"
+  }
+}

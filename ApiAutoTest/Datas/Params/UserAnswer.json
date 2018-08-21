@@ -1,0 +1,24 @@
+{
+  "get/userAnswer/{userAnswerId}": {
+    "infoType": "answerDone",
+    "userAnswerId": 243087
+  },
+  "post/userAnswer": {
+    "userAnswerPostParam": {
+      "assignmentId": 42,
+      "userAnswerId": 42,
+      "userId": 42,
+      "examPaperId": 42,
+      "answerPlanId": 42,
+      "planType": "string",
+      "questions": {
+        "answerDate": "string",
+        "questionId": "string",
+        "duration": 42,
+        "answerDesc": "string"
+      },
+      "duration": 42,
+      "chapterId": 42
+    }
+  }
+}

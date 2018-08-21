@@ -1,0 +1,8 @@
+{
+  "post/commodity/api/v1/IM/join": {
+    "imId": "@TGS#a5YDTFIFL"
+  },
+  "post/commodity/api/v1/IM/quit": {
+    "imId": "@TGS#a5YDTFIFL"
+  }
+}
